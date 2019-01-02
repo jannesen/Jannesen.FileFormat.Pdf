@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 
 namespace Jannesen.FileFormat.Pdf.Internal
@@ -102,8 +102,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
                 rs += n;
             }
 
-            switch (filter)
-            {
+            switch (filter) {
             case 0: //PNG_FILTER_NONE
                 break;
 

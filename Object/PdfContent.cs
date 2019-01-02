@@ -1,4 +1,4 @@
-﻿/*@
+/*@
     Copyright � Jannesen Holding B.V. 2006-2010.
     Unautorised reproduction, distribution or reverse eniginering is prohibited.
 */
@@ -232,8 +232,7 @@ namespace Jannesen.FileFormat.Pdf
                 if (align != PdfTextAlign.Left) {
                     PdfDistance Width = textStyle.Font.TextWidth(textStyle.FontSize, txt);
 
-                    switch(align)
-                    {
+                    switch(align) {
                     case PdfTextAlign.Right:    point.x -= Width;       break;
                     case PdfTextAlign.Center:   point.x -= Width / 2;   break;
                     }
@@ -593,8 +592,7 @@ namespace Jannesen.FileFormat.Pdf
                     number = -number;
                 }
 
-                switch(precision)
-                {
+                switch(precision) {
                 case 0:
                 case 1:     number *=      10.0;        break;
                 case 2:     number *=     100.0;        break;
@@ -777,8 +775,7 @@ namespace Jannesen.FileFormat.Pdf
                                 throw new PdfException("Resource dictionary corrupt.");
 
 
-                            switch(cls)
-                            {
+                            switch(cls) {
 #if DEBUG_TEST
                             case "ProcSet":
                                 System.Diagnostics.Debug.WriteLine("Resourse " + cls);

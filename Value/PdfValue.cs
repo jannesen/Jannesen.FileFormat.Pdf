@@ -1,4 +1,4 @@
-﻿/*@
+/*@
     Copyright � Jannesen Holding B.V. 2006-2010.
     Unautorised reproduction, distribution or reverse eniginering is prohibited.
 */
@@ -82,8 +82,7 @@ namespace Jannesen.FileFormat.Pdf
             PdfValue token;
 
             while ((token = reader.ReadToken()).Type != endValueType) {
-                switch (token.Type)
-                {
+                switch (token.Type) {
                 case PdfValueType.Reference:            pdfReadReference(reader);           break;
                 case PdfValueType.ArrayBegin:           pdfReadArray(reader);               break;
                 case PdfValueType.DictionaryBegin:      pdfReadDictionary(reader);          break;

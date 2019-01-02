@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 /*
  * $Id: Tree.cs,v 1.2 2006/07/31 14:30:59 psoares33 Exp $
  *

@@ -1,4 +1,4 @@
-﻿/*@
+/*@
     Copyright � Jannesen Holding B.V. 2007-2010.
     Unautorised reproduction, distribution or reverse eniginering is prohibited.
 */
@@ -164,8 +164,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
             for(int i = 0 ; i < 9 ; ++i) {
                 bits = bits << 1;
 
-                switch(Encoding[i])
-                {
+                switch(Encoding[i]) {
                 case 'N':
                     break;
 

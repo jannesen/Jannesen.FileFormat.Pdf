@@ -1,4 +1,4 @@
-﻿/*@
+/*@
     Copyright � Jannesen Holding B.V. 2006-2010.
     Unautorised reproduction, distribution or reverse eniginering is prohibited.
 */
@@ -70,8 +70,7 @@ skip_separator:
                 goto skip_separator;
             }
 
-            switch(c)
-            {
+            switch(c) {
             case '/':
                 {
                     int             Length = 0;
@@ -151,8 +150,7 @@ skip_separator:
                     while (level > 0) {
                         c = ReadByte();
 
-                        switch(c)
-                        {
+                        switch(c) {
                         case '(':
                             ++level;
                             Buf.Add((byte)'(');
@@ -165,8 +163,7 @@ skip_separator:
 
                         case '\\':
                             c = ReadByte();
-                            switch (c)
-                            {
+                            switch (c) {
                             case '0':
                             case '1':
                             case '2':
@@ -271,8 +268,7 @@ skip_separator:
 
                     string  StrBuf = new string(Buf, 0, Length);
 
-                    switch(StrBuf)
-                    {
+                    switch(StrBuf) {
                     case "xref":        return PdfToken.Xref;
                     case "trailer":     return PdfToken.Trailer;
                     case "startxref":   return PdfToken.StartXref;
@@ -321,8 +317,7 @@ skip_separator:
         {
             PdfValue token = ReadToken();
 
-            switch(token.Type)
-            {
+            switch(token.Type) {
             case PdfValueType.DictionaryBegin:      return new PdfDictionary(this);
             case PdfValueType.ArrayBegin:           return new PdfArray(this);
             case PdfValueType.Null:                 return token;

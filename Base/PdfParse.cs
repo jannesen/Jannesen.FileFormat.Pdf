@@ -1,4 +1,4 @@
-﻿/*@
+/*@
     Copyright � Jannesen Holding B.V. 2006-2010.
     Unautorised reproduction, distribution or reverse eniginering is prohibited.
 */
@@ -24,8 +24,7 @@ namespace Jannesen.FileFormat.Pdf
         {
             str = str.Trim();
 
-            switch(str)
-            {
+            switch(str) {
             case "black":   return Jannesen.FileFormat.Pdf.PdfColorCMYK.ncBlack;
 
             default:
@@ -56,8 +55,7 @@ namespace Jannesen.FileFormat.Pdf
         {
             str = str.Trim();
 
-            switch(str)
-            {
+            switch(str) {
             case "black":   return PdfColorRGB.ncBlack;
             case "red":     return PdfColorRGB.ncRed;
             case "green":   return PdfColorRGB.ncGreen;
@@ -145,8 +143,7 @@ namespace Jannesen.FileFormat.Pdf
         {
             str = str.Trim();
 
-            switch(str)
-            {
+            switch(str) {
             case "A0":  return PdfPageSize.A0;
             case "A1":  return PdfPageSize.A1;
             case "A2":  return PdfPageSize.A2;

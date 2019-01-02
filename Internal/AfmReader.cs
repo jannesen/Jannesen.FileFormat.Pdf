@@ -1,4 +1,4 @@
-﻿/*@
+/*@
     Copyright � Jannesen Holding B.V. 2006-2010.
     Unautorised reproduction, distribution or reverse eniginering is prohibited.
 */
@@ -185,8 +185,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
         }
         public              bool            ReadBoolean()
         {
-            switch(ReadString(false))
-            {
+            switch(ReadString(false)) {
             case "true":    return true;
             case "false":   return false;
             default:        throw new PdfException("Invalid boolean value.");
@@ -216,8 +215,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
 
             c = _stream.ReadByte();
 
-            switch(c)
-            {
+            switch(c) {
             case ';':
                 _atSubKey  = true;
                 _atNewLine = false;

@@ -1,4 +1,4 @@
-﻿/*@
+/*@
     Copyright � Jannesen Holding B.V. 2006-2010.
     Unautorised reproduction, distribution or reverse eniginering is prohibited.
 */
@@ -138,8 +138,7 @@ namespace Jannesen.FileFormat.Pdf
                 if (pos > _imageDataLength - 2 || _imageData[pos] != 0xFF)
                     throw new PdfExceptionWriter("Corrupt JPEG image.");
 
-                switch(_imageData[pos + 1])
-                {
+                switch(_imageData[pos + 1]) {
                 case 0xE0:  // APP0
                     break;
 

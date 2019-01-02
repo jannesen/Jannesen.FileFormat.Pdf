@@ -1,4 +1,4 @@
-﻿/*@
+/*@
     Copyright � Jannesen Holding B.V. 2006-2010.
     Unautorised reproduction, distribution or reverse eniginering is prohibited.
 */
@@ -12,8 +12,7 @@ namespace Jannesen.FileFormat.Pdf
     {
         public  static      Stream      GetCompressor(string filter, Stream output)
         {
-            switch (filter)
-            {
+            switch (filter) {
             case null:          return output;
             case "FlateDecode": return new Jannesen.FileFormat.Pdf.ZLib.ZDeflaterOutputStream(output);
             default:            throw new PdfException("Can't compress '"+filter+"'.");
@@ -21,8 +20,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public  static      Stream      GetDecompressor(string filter, Stream input)
         {
-            switch (filter)
-            {
+            switch (filter) {
             case "FlateDecode": return new Jannesen.FileFormat.Pdf.ZLib.ZInflaterInputStream(input);
             default:            throw new PdfException("Can't decompress '"+filter+"'.");
             }

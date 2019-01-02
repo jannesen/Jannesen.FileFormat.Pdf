@@ -1,4 +1,4 @@
-﻿/*@
+/*@
     Copyright � Jannesen Holding B.V. 2006-2010.
     Unautorised reproduction, distribution or reverse eniginering is prohibited.
 */
@@ -62,8 +62,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
             string  name    = null;
             string  prefix;
 
-            switch(cls)
-            {
+            switch(cls) {
             case PdfObject.ntFont:      prefix = "F";   break;
             case PdfObject.ntXObject:   prefix = "I";   break;
             default:                    prefix = "X";   break;

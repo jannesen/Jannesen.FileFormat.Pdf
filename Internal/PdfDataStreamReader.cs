@@ -1,4 +1,4 @@
-﻿/*@
+/*@
     Copyright � Jannesen Holding B.V. 2006-2010.
     Unautorised reproduction, distribution or reverse eniginering is prohibited.
 */
@@ -44,8 +44,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
         {
             long    newPosition;
 
-            switch(Origin)
-            {
+            switch(Origin) {
             case SeekOrigin.Begin:      newPosition = Offset;               break;
             case SeekOrigin.Current:    newPosition = _position + Offset;   break;
             case SeekOrigin.End:        newPosition = _length + Offset;     break;

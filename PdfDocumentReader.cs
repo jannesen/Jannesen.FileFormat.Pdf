@@ -1,4 +1,4 @@
-﻿/*@
+/*@
     Copyright � Jannesen Holding B.V. 2006-2010.
     Unautorised reproduction, distribution or reverse eniginering is prohibited.
 */
@@ -115,8 +115,7 @@ namespace Jannesen.FileFormat.Pdf
 
                 try {
                     var token = reader.ReadToken();
-                    switch(token.Type)
-                    {
+                    switch(token.Type) {
                     case PdfValueType.Xref:
                         _readXrefTable(reader);
                         break;
@@ -221,8 +220,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         private             void                        _constructPages(PdfDictionary pageNode, List<PdfDictionary> pages)
         {
-            switch(pageNode.NamedType)
-            {
+            switch(pageNode.NamedType) {
             case "Page":
                 pages.Add(pageNode);
                 return;
@@ -352,8 +350,7 @@ namespace Jannesen.FileFormat.Pdf
 
             while ((Token = reader.ReadToken()).Type != PdfValueType.DictionaryEnd) {
                 if (Token.Type == PdfValueType.Name) {
-                    switch(((PdfName)Token).Value)
-                    {
+                    switch(((PdfName)Token).Value) {
                     case "Size":
                             if (reader.ReadInt() != _xrefTable.Length)
                                 throw new PdfExceptionReader("PDF stream corrupt: Xref table size d'not match trailer 'Size'.");
@@ -417,8 +414,7 @@ namespace Jannesen.FileFormat.Pdf
             for (int i = 0 ; i < dictionary.Count ; ++i) {
                 var entry = dictionary[i];
                 if (entry is PdfName) {
-                    switch(((PdfName)entry).Value)
-                    {
+                    switch(((PdfName)entry).Value) {
                     case "W":       w                 = ((PdfArray)dictionary[++i]).Children;               break;
                     case "Index":   index             = ((PdfArray)dictionary[++i]).Children;               break;
                     case "Size":    size              = ((PdfInteger)dictionary[++i]).Value;                break;
@@ -448,8 +444,7 @@ namespace Jannesen.FileFormat.Pdf
                     int     v2 = r.ReadValue(s2);
                     int     v3 = r.ReadValue(s3);
 
-                    switch(t)
-                    {
+                    switch(t) {
                     case 0:                                                                             break;
                     case 1:     pdfGetReference(id, v3).setPosition(v2);                                break;
                     case 2:     pdfGetReference(id, 0).setCompressed(v3, pdfGetReference(v2, 0));       break;

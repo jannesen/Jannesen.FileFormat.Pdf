@@ -1,4 +1,4 @@
-﻿/*@
+/*@
     Copyright © Jannesen Holding B.V. 2006-2010.
     Unautorised reproduction, distribution or reverse eniginering is prohibited.
 */
@@ -85,8 +85,7 @@ namespace Jannesen.FileFormat.Pdf
             if (c >= 0x20 && c <= 0x7F)
                 return (byte)c;
 
-            switch(c)
-            {
+            switch(c) {
             case (char)0x00A1:  return  0x00A1; //      exclamdown
             case (char)0x00A2:  return  0x00A2; //      cent
             case (char)0x00A3:  return  0x00A3; //      sterling
@@ -270,8 +269,7 @@ namespace Jannesen.FileFormat.Pdf
                 bool            fCharMetrics = false;
 
                 while ((Key = Reader.ReadKey(false)) != null) {
-                    switch(Key)
-                    {
+                    switch(Key) {
                     case "Comment":                                                                 break;
                     case "Version":                                                                 break;
                     case "FontName":            _fontName           = Reader.ReadString(false);     break;
@@ -374,8 +372,7 @@ namespace Jannesen.FileFormat.Pdf
 
             while ((subKey = reader.ReadKey(true)) != null) {
 
-                switch(subKey)
-                {
+                switch(subKey) {
                 case "WX":
                 case "W0X":
                     width = reader.ReadInteger();

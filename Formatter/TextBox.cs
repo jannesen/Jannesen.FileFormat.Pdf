@@ -1,4 +1,4 @@
-﻿/*@
+/*@
     Copyright � Jannesen Holding B.V. 2006-2010.
     Unautorised reproduction, distribution or reverse eniginering is prohibited.
 */
@@ -233,8 +233,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
                     _calcWidth = lines[l].Width;
             }
 
-            switch(_align)
-            {
+            switch(_align) {
             case PdfTextAlign.Center:
                 for (int l = 0 ; l < lines.Length ; ++l)
                     lines[l].Left = (_calcWidth - lines[l].Width) / 2;

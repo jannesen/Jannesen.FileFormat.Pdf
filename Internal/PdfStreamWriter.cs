@@ -1,4 +1,4 @@
-﻿/*@
+/*@
     Copyright � Jannesen Holding B.V. 2006-2010.
     Unautorised reproduction, distribution or reverse eniginering is prohibited.
 */
@@ -68,8 +68,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
         }
         public                          void                WriteNull()
         {
-            switch (_previousValue)
-            {
+            switch (_previousValue) {
             case PdfValueType.None:
             case PdfValueType.DictionaryBegin:
             case PdfValueType.ArrayBegin:
@@ -85,8 +84,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
         }
         public                          void                WriteBoolean(bool value)
         {
-            switch (_previousValue)
-            {
+            switch (_previousValue) {
             case PdfValueType.None:
             case PdfValueType.DictionaryBegin:
             case PdfValueType.ArrayBegin:
@@ -102,8 +100,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
         }
         public                          void                WriteInteger(int value)
         {
-            switch (_previousValue)
-            {
+            switch (_previousValue) {
             case PdfValueType.None:
             case PdfValueType.DictionaryBegin:
             case PdfValueType.ArrayBegin:
@@ -142,8 +139,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
         }
         public                          void                WriteNumber(double value)
         {
-            switch (_previousValue)
-            {
+            switch (_previousValue) {
             case PdfValueType.None:
             case PdfValueType.DictionaryBegin:
             case PdfValueType.ArrayBegin:
@@ -165,8 +161,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
                 value = -value;
             }
 
-            switch(prec)
-            {
+            switch(prec) {
             case 0:
             case 1:     value *=     10.0;      break;
             case 2:     value *=    100.0;      break;
@@ -262,8 +257,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
                     if (chr < (char)32) {
                         WriteByte((byte)'\\');
 
-                        switch(chr)
-                        {
+                        switch(chr) {
                         case '\n':  WriteByte((byte)'n');       break;
                         case '\r':  WriteByte((byte)'r');       break;
                         case '\t':  WriteByte((byte)'t');       break;
@@ -428,8 +422,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
         }
         public                          void                WriteByteStr(byte[] str)
         {
-            switch (_previousValue)
-            {
+            switch (_previousValue) {
             case PdfValueType.None:
             case PdfValueType.DictionaryBegin:
             case PdfValueType.ArrayBegin:
