@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 /*
  * $Id: ZStream.cs,v 1.1 2006/06/16 10:56:20 psoares33 Exp $
  *
