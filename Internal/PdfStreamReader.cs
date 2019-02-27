@@ -71,8 +71,7 @@ skip_separator:
             }
 
             switch(c) {
-            case '/':
-                {
+            case '/': {
                     int             Length = 0;
                     char[]          Buf = new char[256];
 
@@ -98,8 +97,7 @@ skip_separator:
                     return new PdfName(Buf, Length);
                 }
 
-            case '<':
-                {
+            case '<': {
                     List<byte>  Buf = new List<byte>(256);
 
                     c = ReadByte();
@@ -126,8 +124,7 @@ skip_separator:
                     return new PdfString(true, Buf.ToArray());
                 }
 
-            case '>':
-                {
+            case '>': {
                     c = ReadByte();
 
                     if (c != '>')
@@ -142,8 +139,7 @@ skip_separator:
             case ']':
                 return new PdfToken(PdfValueType.ArrayEnd);
 
-            case '(':
-                {
+            case '(': {
                     List<byte>  Buf = new List<byte>(256);
                     int level = 1;
 
@@ -204,8 +200,7 @@ skip_separator:
             case '6':
             case '7':
             case '8':
-            case '9':
-                {
+            case '9': {
                     bool            Sign          = false;
                     Int64           IntegerValue  = 0;
                     double          NumberValue;

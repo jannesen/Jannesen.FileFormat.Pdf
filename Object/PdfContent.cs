@@ -781,8 +781,7 @@ namespace Jannesen.FileFormat.Pdf
                                 System.Diagnostics.Debug.WriteLine("Resourse " + cls);
                                 break;
 
-                            case "Properties":
-                                {
+                            case "Properties": {
                                     var resourceItems = resources[resourceIdx].Resolve<PdfDictionary>();
 
                                     if ((resourceItems.Children.Count % 2) != 0)
@@ -803,8 +802,7 @@ namespace Jannesen.FileFormat.Pdf
                             case "Font":
                             case "XObject":
                             case "ExtGState":
-                            case "ColorSpace":
-                                {
+                            case "ColorSpace": {
                                     var resourceItems = resources[resourceIdx].Resolve<PdfDictionary>();
 
                                     if ((resourceItems.Children.Count % 2) != 0)

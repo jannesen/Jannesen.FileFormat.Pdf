@@ -395,8 +395,7 @@ namespace Jannesen.FileFormat.Pdf
                 case "W1Y":
                     throw new PdfException("Only right to left font are supported.");
 
-                case "N":
-                    {
+                case "N": {
                         string  GlyphName = reader.ReadString(false);
 
                         unicode = AfmReader.GlyphNameToUnicode(GlyphName);

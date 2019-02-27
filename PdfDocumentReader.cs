@@ -356,8 +356,7 @@ namespace Jannesen.FileFormat.Pdf
                                 throw new PdfExceptionReader("PDF stream corrupt: Xref table size d'not match trailer 'Size'.");
                         break;
 
-                    case "Prev":
-                        {
+                    case "Prev": {
                             var p = reader.ReadInt();
                             reader.ReadToken(PdfValueType.Xref);
                             _readXrefTable(new PdfStreamReader(this, _stream, p));
@@ -376,8 +375,7 @@ namespace Jannesen.FileFormat.Pdf
                         _infoReference = pdfGetReference(reader.ReadReference());
                         break;
 
-                    case "ID":
-                        {
+                    case "ID": {
                             List<PdfValue> ID = new List<PdfValue>();
 
                             reader.ReadToken(PdfValueType.ArrayBegin);
