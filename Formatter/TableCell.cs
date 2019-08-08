@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,9 +6,9 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 {
     public class TableCell: ContainerBox
     {
-        private                 TableColumn         _column;
-        private                 TableRow            _row;
-        private                 int                 _colSpan;
+        private readonly        TableColumn         _column;
+        private readonly        TableRow            _row;
+        private readonly        int                 _colSpan;
 
         public                  TableColumn         Column
         {
@@ -35,6 +31,9 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public                                      TableCell(TableRow row, TableColumn column, int colSpan)
         {
+            if (row is null) throw new ArgumentNullException(nameof(row));
+            if (column is null) throw new ArgumentNullException(nameof(column));
+
             _column     = column;
             _row        = row;
             _colSpan    = colSpan;
@@ -86,6 +85,8 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public                  TextBox             AddText(string text)
         {
+            if (text is null) throw new ArgumentNullException(nameof(text));
+
             PdfStyleText    style;
             PdfTextAlign    align;
             int             maxLines;
@@ -124,14 +125,14 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
     public class TableCells: List<TableCell>
     {
-        private                 TableRow            _row;
-        private                 int[]               _colSpans;
+        private readonly        TableRow            _row;
+        private readonly        int[]               _colSpans;
 
         public      new         TableCell           this[int column]
         {
             get {
                 if (column < 0 || column >=Count)
-                    throw new ArgumentOutOfRangeException("Column out of range.");
+                    throw new ArgumentOutOfRangeException(nameof(column));
 
                 int ColSpan = (_colSpans != null) ? _colSpans[column] : 1;
 
@@ -154,6 +155,8 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public                                      TableCells(TableRow row, int[] colSpans)
         {
+            if (row is null) throw new ArgumentNullException(nameof(row));
+
             if (colSpans != null && colSpans.Length != row.Table.Columns.Count)
                 throw new ArgumentException("Invalid ColSpan array.");
 

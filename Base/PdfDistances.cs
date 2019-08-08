@@ -1,12 +1,8 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 
 namespace Jannesen.FileFormat.Pdf
 {
-    public struct PdfDistance
+    public struct PdfDistance: IEquatable<PdfDistance>
     {
         public const        double          inc_mm = 25.4;
         public const        double          pnt_mm = 72 / inc_mm;
@@ -121,6 +117,10 @@ namespace Jannesen.FileFormat.Pdf
             }
 
             return false;
+        }
+        public              bool            Equals(PdfDistance o)
+        {
+            return this == o;
         }
         public  override    int             GetHashCode()
         {

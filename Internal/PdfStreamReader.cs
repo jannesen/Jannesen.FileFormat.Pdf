@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -12,10 +8,10 @@ namespace Jannesen.FileFormat.Pdf.Internal
 {
     public class PdfStreamReader
     {
-        private             PdfDocumentReader           _document;
-        private             Stream                      _stream;
+        private readonly    PdfDocumentReader           _document;
+        private readonly    Stream                      _stream;
         private             int                         _position;
-        private             byte[]                      _buffer;
+        private readonly    byte[]                      _buffer;
         private             int                         _bufferPosition;
         private             int                         _bufferLength;
 

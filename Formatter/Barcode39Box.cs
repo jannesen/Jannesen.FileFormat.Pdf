@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2007-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -37,6 +33,8 @@ namespace Jannesen.FileFormat.Pdf.Formatter
                 return _text;
             }
             set {
+                if (value is null) throw new ArgumentNullException(nameof(value));
+
                 _validateText(value);
                 _text = value;
             }
@@ -44,13 +42,15 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public                                          Barcode39Box(PdfDistance width, PdfDistance height, string text)
         {
+            if (text is null) throw new ArgumentNullException(nameof(text));
+
             _validateText(text);
             _width  = width;
             _height = height;
             _text   = text;
         }
 
-        public  override            void                boxPrintForground(PdfPoint upperLeftCorner, PdfContent content)
+        internal override           void                boxPrintForground(PdfPoint upperLeftCorner, PdfContent content)
         {
             content.DrawRectangle(null, PdfStyleFill.SolidWhite, upperLeftCorner, new PdfSize(_width, _height));
 

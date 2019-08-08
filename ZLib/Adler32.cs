@@ -34,6 +34,8 @@
  * and contributors of zlib.
  */
 
+#pragma warning disable CA1822
+
 namespace Jannesen.FileFormat.Pdf.ZLib
 {
     internal sealed class Adler32

@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -100,6 +96,9 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public                                  TextBox(PdfStyleText style, PdfTextAlign align, PdfDistance width, int maxLines, string text)
         {
+            if (style is null) throw new ArgumentNullException(nameof(style));
+            if (text is null) throw new ArgumentNullException(nameof(text));
+
             _setWidth = width;
             _style    = style;
             _align    = align;
@@ -108,6 +107,9 @@ namespace Jannesen.FileFormat.Pdf.Formatter
         }
         public                                  TextBox(PdfStyleText style, PdfTextAlign align, int maxLines, string text)
         {
+            if (style is null) throw new ArgumentNullException(nameof(style));
+            if (text is null) throw new ArgumentNullException(nameof(text));
+
             _setWidth = PdfDistance.NaN;
             _style    = style;
             _align    = align;
@@ -121,7 +123,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
                 _format();
         }
 
-        public      override    void            boxPrintForground(PdfPoint upperLeftCorner, PdfContent content)
+        internal    override    void            boxPrintForground(PdfPoint upperLeftCorner, PdfContent content)
         {
             if (_lines == null)
                 _format();
@@ -136,7 +138,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
             for(int l = 0 ; l < _lines.Length ; ++l) {
                 upperLeftCorner.y.pnts -= LineHeight.pnts;
                 content.SetTextMatrixH(upperLeftCorner + new PdfPoint(_lines[l].Left, YOffset));
-                content.opShowText(_style.Font, Text, _lines[l].StrBegin, _lines[l].StrLength);
+                content.opShowText(Text, _lines[l].StrBegin, _lines[l].StrLength);
             }
         }
 

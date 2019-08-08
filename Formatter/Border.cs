@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -118,7 +114,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
         {
         }
 
-        public                  void                boxPrint(PdfPoint upperLeftCorner, PdfSize size, PrintBackground background)
+        internal                void                boxPrint(PdfPoint upperLeftCorner, PdfSize size, PrintBackground background)
         {
             if (_top != null)
                 background.DrawLineHorizontal(_top,    upperLeftCorner + new PdfSize(0, -_top.LineWidth.pnts / 2), size.width);

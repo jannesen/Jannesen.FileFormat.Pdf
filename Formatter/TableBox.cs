@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,8 +6,8 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 {
     public class TableBox: Box
     {
-        private                 TableColumns        _columns;
-        private                 TableRows           _rows;
+        private readonly        TableColumns        _columns;
+        private readonly        TableRows           _rows;
         private                 PdfDistance         _calcWidth;
         private                 PdfDistance         _calcHeight;
 
@@ -66,7 +62,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
         {
             return Rows[row].Cells[column];
         }
-        public  override        void                Format()
+        public   override       void                Format()
         {
             PdfDistance     top = PdfDistance.Zero;
 
@@ -118,7 +114,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
             }
         }
 
-        public  override        void                boxPrintBackground(PdfPoint upperLeftCorner, PrintBackground background)
+        internal override       void                boxPrintBackground(PdfPoint upperLeftCorner, PrintBackground background)
         {
             upperLeftCorner += new PdfPoint(Left, Top);
 
@@ -131,7 +127,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
                 }
             }
         }
-        public  override        void                boxPrintForground(PdfPoint upperLeftCorner, PdfContent content)
+        internal override       void                boxPrintForground(PdfPoint upperLeftCorner, PdfContent content)
         {
             upperLeftCorner += new PdfPoint(Left, Top);
 

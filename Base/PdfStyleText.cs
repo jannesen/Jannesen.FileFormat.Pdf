@@ -1,14 +1,10 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 
 namespace Jannesen.FileFormat.Pdf
 {
     public class PdfStyleText
     {
-        private                     bool                _locked;
+        private readonly            bool                _locked;
         private                     PdfFont             _font;
         private                     PdfDistance         _fontSize;
         private                     double              _lineSpacing;
@@ -34,7 +30,7 @@ namespace Jannesen.FileFormat.Pdf
             }
             set {
                 if (value.pnts < 2.0)
-                    throw new ArgumentOutOfRangeException("FontSize is minimal 2.");
+                    throw new InvalidOperationException("FontSize is minimal 2.");
 
                 _checkLocked();
                 _fontSize  = value;
@@ -47,7 +43,7 @@ namespace Jannesen.FileFormat.Pdf
             }
             set {
                 if (value < 1.0)
-                    throw new ArgumentOutOfRangeException("LineSpacing is minimal 1.");
+                    throw new InvalidOperationException("LineSpacing is minimal 1.");
 
                 _checkLocked();
                 _lineSpacing = value;
@@ -95,6 +91,8 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfStyleText(PdfStyleText style)
         {
+            if (style is null) throw new ArgumentNullException(nameof(style));
+
             _locked      = false;
             _font        = style._font;
             _fontSize    = style._fontSize;
@@ -103,6 +101,8 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfStyleText(PdfFont font, PdfDistance size)
         {
+            if (font is null) throw new ArgumentNullException(nameof(font));
+
             _locked      = true;
             _font        = font;
             _fontSize    = size;
@@ -111,6 +111,8 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfStyleText(PdfFont font, PdfDistance size, PdfColor textColor)
         {
+            if (font is null) throw new ArgumentNullException(nameof(font));
+
             _locked      = true;
             _font        = font;
             _fontSize    = size;
@@ -119,6 +121,8 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfStyleText(PdfFont font, PdfDistance size, double lineSpacing, PdfColor textColor)
         {
+            if (font is null) throw new ArgumentNullException(nameof(font));
+
             _locked      = true;
             _font        = font;
             _fontSize    = size;

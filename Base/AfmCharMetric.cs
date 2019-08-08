@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,9 +6,9 @@ namespace Jannesen.FileFormat.Pdf
 {
     public class AfmCharMetric
     {
-        private                 int             _height;
-        private                 int             _width;
-        private                 AfmRectangle    _box;
+        private readonly        int             _height;
+        private readonly        int             _width;
+        private readonly        AfmRectangle    _box;
 
         public                  int             Height          { get { return _height; } }
         public                  int             Width           { get { return _width;  } }
@@ -31,7 +27,7 @@ namespace Jannesen.FileFormat.Pdf
             _box    = new AfmRectangle(reader);
         }
 #if DEBUG
-        public                  void            WriteTo(System.IO.BinaryWriter stream)
+        internal                void            WriteTo(System.IO.BinaryWriter stream)
         {
             stream.Write(Convert.ToInt16(_height));
             stream.Write(Convert.ToInt16(_width));

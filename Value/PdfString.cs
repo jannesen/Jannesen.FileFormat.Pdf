@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Jannesen.FileFormat.Pdf.Internal;
@@ -11,8 +7,8 @@ namespace Jannesen.FileFormat.Pdf
 {
     public class PdfString: PdfValue
     {
-        private                 bool                    _hexadecimal;
-        private                 byte[]                  _value;
+        private readonly        bool                    _hexadecimal;
+        private readonly        byte[]                  _value;
 
         public override         PdfValueType            Type        { get { return PdfValueType.String;     } }
         public                  bool                    Hexadecimal { get { return _hexadecimal;            } }
@@ -24,7 +20,7 @@ namespace Jannesen.FileFormat.Pdf
             this._value       = value;
         }
 
-        public  override        void                    pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
+        internal override       void                    pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
         {
             if (_hexadecimal)
                 writer.WriteStringHex(_value);

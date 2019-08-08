@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 
 namespace Jannesen.FileFormat.Pdf
 {
@@ -12,7 +8,7 @@ namespace Jannesen.FileFormat.Pdf
         public  readonly static     PdfStyleFill        SolidBlack  = new PdfStyleFill(PdfColorCMYK.ncBlack);
         public  readonly static     PdfStyleFill        SolidWhite  = new PdfStyleFill(PdfColorCMYK.ncWhite);
 
-        private                     bool                _locked;
+        private readonly            bool                _locked;
         private                     PdfColor            _fillColor;
 
         public                      PdfColor            FillColor
@@ -36,11 +32,15 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfStyleFill(PdfStyleFill style)
         {
+            if (style is null) throw new ArgumentNullException(nameof(style));
+
             _fillColor  = style._fillColor;
             _locked     = false;
         }
         public                                          PdfStyleFill(PdfColor fillColor)
         {
+            if (fillColor is null) throw new ArgumentNullException(nameof(fillColor));
+
             _fillColor  = fillColor;
             _locked     = true;
         }

@@ -5,8 +5,8 @@ namespace Jannesen.FileFormat.Pdf.Internal
 {
     sealed class PdfXrefStreamReader: IDisposable
     {
-        private                 Stream          _inputStream;
-        private                 byte[]          _buf;
+        private readonly        Stream          _inputStream;
+        private readonly        byte[]          _buf;
         private                 int             _buf_pos;
         private                 int             _buf_length;
 

@@ -1,12 +1,8 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 
 namespace Jannesen.FileFormat.Pdf
 {
-    public class PdfPageSize
+    public static class PdfPageSize
     {
         public static readonly PdfSize      A0      = new PdfSize(2384, 3370);
         public static readonly PdfSize      A1      = new PdfSize(1684, 2384);

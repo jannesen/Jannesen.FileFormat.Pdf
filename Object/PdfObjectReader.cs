@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -10,19 +6,19 @@ using Jannesen.FileFormat.Pdf.Internal;
 
 namespace Jannesen.FileFormat.Pdf
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "Stream is not owned by this class.")]
     public sealed class PdfObjectReader: PdfObject
     {
-        private                 PdfDictionary               _dictionary;
+        private readonly        PdfDictionary               _dictionary;
         private                 Stream                      _stream;
-        private                 string                      _namedType;
+        private readonly        string                      _namedType;
 
         public  override        PdfValueType                Type        { get => PdfValueType.Object; }
         public  override        string                      NamedType   { get => _namedType;  }
         public                  PdfDictionary               Dictionary  { get => _dictionary; }
         public  override        bool                        hasStream   { get => true;        }
 
-        public                                              PdfObjectReader(PdfDictionary dictionary, PdfDataStreamReader stream)
+        internal                                            PdfObjectReader(PdfDictionary dictionary, PdfDataStreamReader stream)
         {
             _dictionary = dictionary;
             _stream     = stream;
@@ -83,7 +79,7 @@ namespace Jannesen.FileFormat.Pdf
             }
         }
 
-        public  override        void                        pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
+        internal override       void                        pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
         {
             _dictionary.pdfWriteToDocument(document, writer);
             writer.WriteStream(GetStream(), (int)_stream.Length);

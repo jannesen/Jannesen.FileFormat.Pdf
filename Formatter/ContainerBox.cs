@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,7 +10,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
         private                 Border              _border;
         private                 MarginPadding       _padding;
         private                 PdfStyleFill        _background;
-        private                 BoxList             _children;
+        private readonly        BoxList             _children;
         private                 PdfDistance         _setWidth;
         private                 PdfDistance         _calcWidth;
         private                 PdfDistance         _calcHeight;
@@ -167,7 +163,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
                 _calcHeight -= _padding.Bottom;
             }
         }
-        public      override    void                boxPrintBackground(PdfPoint upperLeftCorner, PrintBackground background)
+        internal    override    void                boxPrintBackground(PdfPoint upperLeftCorner, PrintBackground background)
         {
             upperLeftCorner += new PdfPoint(Left, Top);
 
@@ -188,7 +184,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
             for (int i = 0 ; i < _children.Count ; ++i)
                 _children[i].boxPrintBackground(upperLeftCorner, background);
         }
-        public      override    void                boxPrintForground(PdfPoint upperLeftCorner, PdfContent content)
+        internal    override    void                boxPrintForground(PdfPoint upperLeftCorner, PdfContent content)
         {
             upperLeftCorner += new PdfPoint(Left, Top);
 

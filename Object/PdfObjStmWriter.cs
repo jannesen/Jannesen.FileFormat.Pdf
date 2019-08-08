@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -10,7 +6,7 @@ using Jannesen.FileFormat.Pdf.Internal;
 
 namespace Jannesen.FileFormat.Pdf
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable")] // TODO
     public sealed class PdfObjStmWriter: PdfObject
     {
         private                 int                         _n;
@@ -30,7 +26,7 @@ namespace Jannesen.FileFormat.Pdf
             _dataWriter = new PdfStreamWriter(_dataBuffer = new StreamBuffer());
         }
 
-        public                  int                         AddObj(PdfDocumentWriter document, PdfWriterReference reference, PdfValue obj)
+        internal                int                         AddObj(PdfDocumentWriter document, PdfWriterReference reference, PdfValue obj)
         {
             _intWriter.WriteInteger(reference.Id);
             _intWriter.WriteInteger((int)_dataBuffer.Length);
@@ -38,7 +34,7 @@ namespace Jannesen.FileFormat.Pdf
             return _n++;
         }
 
-        public  override        void                        pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
+        internal override       void                        pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
         {
             using (var compressStream = new StreamBuffer())
             {

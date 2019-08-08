@@ -1,9 +1,6 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
@@ -29,6 +26,8 @@ namespace Jannesen.FileFormat.Pdf.Internal
     {
         public              void                InitFrom(PdfResourceEntryList list)
         {
+            if (list is null) throw new ArgumentNullException(nameof(list));
+
             base.Clear();
 
             for (int i = 0 ; i < list.Count ; ++i)
@@ -54,6 +53,8 @@ namespace Jannesen.FileFormat.Pdf.Internal
         }
         public              string              GetName(PdfObject resource)
         {
+            if (resource is null) throw new ArgumentNullException(nameof(resource));
+
             PdfResourceEntry    Entry = FindByObject(resource);
             if (Entry != null)
                 return Entry.Name;
@@ -69,7 +70,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
             }
 
             for (int i = 0 ; i < Count ; ++i) {
-                if (base[i].Name.StartsWith(prefix))
+                if (base[i].Name.StartsWith(prefix, StringComparison.InvariantCulture))
                     name = base[i].Name;
             }
 
@@ -78,7 +79,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
                     n = 1;
 
                 do {
-                    name = prefix + (++n).ToString();
+                    name = prefix + (++n).ToString(CultureInfo.InvariantCulture);
                 }
                 while (FindByName(name) != null);
             }
@@ -95,12 +96,15 @@ namespace Jannesen.FileFormat.Pdf.Internal
         }
         public  new         void                Add(PdfResourceEntry entry)
         {
+            if (entry is null) throw new ArgumentNullException(nameof(entry));
+
             if (FindByName(entry.Name) != null)
                 throw new PdfExceptionWriter("Resource name already in use.");
 
             base.Add(entry);
         }
-        public              void                pdfWriteResources(PdfDocumentWriter document, PdfStreamWriter writer)
+
+        internal            void                pdfWriteResources(PdfDocumentWriter document, PdfStreamWriter writer)
         {
             bool[]      entryWriten = new bool[Count];
 

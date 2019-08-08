@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -20,9 +16,7 @@ namespace Jannesen.FileFormat.Pdf
 
         public      static          PdfData                         ReadEmbedded()
         {
-            PdfData     rtn = new PdfData();
-
-            rtn._standardFonts = new Dictionary<string, PdfFont>();
+            PdfData     rtn = new PdfData() { _standardFonts = new Dictionary<string, PdfFont>() };
 
             using (BinaryReader reader = new BinaryReader(typeof(PdfData).Assembly.GetManifestResourceStream("Jannesen.FileFormat.Pdf.Data.bin")))
             {
@@ -39,17 +33,17 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                      PdfFont                         GetFont(string familyName, bool bold, bool italic)
         {
-            PdfFontFamily   FontFamily = null;
+            PdfFontFamily   FontFamily;
 
-            if (string.Compare(familyName, "courier", true) == 0)       FontFamily = FontFamilyCourier;
+            if (string.Compare(familyName, "courier", StringComparison.InvariantCultureIgnoreCase) == 0)       FontFamily = FontFamilyCourier;
             else
-            if (string.Compare(familyName, "helvetica", true) == 0)     FontFamily = FontFamilyHelvetica;
+            if (string.Compare(familyName, "helvetica", StringComparison.InvariantCultureIgnoreCase) == 0)     FontFamily = FontFamilyHelvetica;
             else
-            if (string.Compare(familyName, "times-roman", true) == 0)   FontFamily = FontFamilyTimesRoman;
+            if (string.Compare(familyName, "times-roman", StringComparison.InvariantCultureIgnoreCase) == 0)   FontFamily = FontFamilyTimesRoman;
             else
-            if (string.Compare(familyName, "symbol", true) == 0)        FontFamily = FontFamilySymbol;
+            if (string.Compare(familyName, "symbol", StringComparison.InvariantCultureIgnoreCase) == 0)        FontFamily = FontFamilySymbol;
             else
-            if (string.Compare(familyName, "zapf-dngbats", true) == 0)  FontFamily = FontFamilyZapfDingbats;
+            if (string.Compare(familyName, "zapf-dngbats", StringComparison.InvariantCultureIgnoreCase) == 0)  FontFamily = FontFamilyZapfDingbats;
             else
                 throw new PdfException("Unknown font-family '"+familyName+"'.");
 
@@ -60,7 +54,7 @@ namespace Jannesen.FileFormat.Pdf
             _standardFonts.TryGetValue(fontName, out PdfFont value);
             return value;
         }
-        public                      void                            _indexFonts()
+        private                     void                            _indexFonts()
         {
             _standardFonts = new Dictionary<string, PdfFont>();
             _indexFontFamily(FontFamilyCourier);
@@ -69,7 +63,7 @@ namespace Jannesen.FileFormat.Pdf
             _indexFontFamily(FontFamilySymbol);
             _indexFontFamily(FontFamilyZapfDingbats);
         }
-        public                      void                            _indexFontFamily(PdfStandardFontFamily fontFamily)
+        private                     void                            _indexFontFamily(PdfStandardFontFamily fontFamily)
         {
             foreach(var f in fontFamily.Fonts) {
                 if (f != null) {
@@ -80,27 +74,28 @@ namespace Jannesen.FileFormat.Pdf
 #if DEBUG
         public      static          PdfData                         ReadFromFiles()
         {
-            PdfData     rtn = new PdfData();
-            rtn.FontFamilyCourier       = new PdfStandardFontFamily("Courier",      "Courier.afm",
-                                                                                    "Courier-Bold.afm",
-                                                                                    "Courier-Oblique.afm",
-                                                                                    "Courier-BoldOblique.afm");
-            rtn.FontFamilyHelvetica     = new PdfStandardFontFamily("Helvetica",    "Helvetica.afm",
-                                                                                    "Helvetica-Bold.afm",
-                                                                                    "Helvetica-Oblique.afm",
-                                                                                    "Helvetica-BoldOblique.afm");
-            rtn.FontFamilyTimesRoman    = new PdfStandardFontFamily("Courier",      "Times-Roman.afm",
-                                                                                    "Times-Bold.afm",
-                                                                                    "Times-Italic.afm",
-                                                                                    "Times-BoldItalic.afm");
-            rtn.FontFamilySymbol        = new PdfStandardFontFamily("Symbol",       "Symbol.afm",
-                                                                                    null,
-                                                                                    null,
-                                                                                    null);
-            rtn.FontFamilyZapfDingbats  = new PdfStandardFontFamily("ZapfDingbats", "ZapfDingbats.afm",
-                                                                                    null,
-                                                                                    null,
-                                                                                    null);
+            var rtn = new PdfData() {
+                          FontFamilyCourier       = new PdfStandardFontFamily("Courier",      "Courier.afm",
+                                                                                              "Courier-Bold.afm",
+                                                                                              "Courier-Oblique.afm",
+                                                                                              "Courier-BoldOblique.afm"),
+                          FontFamilyHelvetica     = new PdfStandardFontFamily("Helvetica",    "Helvetica.afm",
+                                                                                              "Helvetica-Bold.afm",
+                                                                                              "Helvetica-Oblique.afm",
+                                                                                              "Helvetica-BoldOblique.afm"),
+                          FontFamilyTimesRoman    = new PdfStandardFontFamily("Courier",      "Times-Roman.afm",
+                                                                                              "Times-Bold.afm",
+                                                                                              "Times-Italic.afm",
+                                                                                              "Times-BoldItalic.afm"),
+                          FontFamilySymbol        = new PdfStandardFontFamily("Symbol",       "Symbol.afm",
+                                                                                              null,
+                                                                                              null,
+                                                                                              null),
+                          FontFamilyZapfDingbats  = new PdfStandardFontFamily("ZapfDingbats", "ZapfDingbats.afm",
+                                                                                              null,
+                                                                                              null,
+                                                                                              null)
+                    };
 
             rtn._indexFonts();
 

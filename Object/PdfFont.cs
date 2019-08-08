@@ -1,9 +1,6 @@
-﻿/*@
-    Copyright © Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.IO;
+using System.Globalization;
 using System.Text;
 using Jannesen.FileFormat.Pdf.Internal;
 
@@ -28,29 +25,29 @@ namespace Jannesen.FileFormat.Pdf
         private                 int                 _descender;
         private                 int                 _stdHW;
         private                 int                 _stdVW;
-        private                 AfmCharMetric[]     _charMetric;
+        private readonly        AfmCharMetric[]     _charMetric;
 
-        public  override        string              NamedType               { get { return "Font";                                      } }
-        public                  string              FontName                { get { return _fontName;                                   } }
-        public                  string              FullName                { get { return _fullName;                                   } }
-        public                  string              FamilyName              { get { return _familyName;                                 } }
-        public                  bool                Bold                    { get { return string.Compare(_weight, "bold", true) == 0;  } }
-        public                  bool                Italic                  { get { return _italicAngle < -1.0;                         } }
-        public                  string              Weight                  { get { return _weight;                                     } }
-        public                  bool                IsCIDFont               { get { return _isCIDFont;                                  } }
-        public                  double              ItalicAngle             { get { return _italicAngle;                                } }
-        public                  bool                IsFixedPitch            { get { return _isFixedPitch;                               } }
-        public                  string              CharacterSet            { get { return _characterSet;                               } }
-        public                  AfmRectangle        FontBBox                { get { return _fontBBox;                                   } }
-        public                  int                 UnderlinePosition       { get { return _underlinePosition;                          } }
-        public                  int                 UnderlineThickness      { get { return _underlineThickness;                         } }
-        public                  int                 CapHeight               { get { return _capHeight;                                  } }
-        public                  int                 XHeight                 { get { return _xheight;                                    } }
-        public                  int                 Ascender                { get { return _ascender;                                   } }
-        public                  int                 Descender               { get { return _descender;                                  } }
-        public                  int                 StdHW                   { get { return _stdHW;                                      } }
-        public                  int                 StdVW                   { get { return _stdVW;                                      } }
-        public                  AfmCharMetric[]     CharMetric              { get { return _charMetric;                                 } }
+        public  override        string              NamedType               { get { return "Font";                                                                              } }
+        public                  string              FontName                { get { return _fontName;                                                                           } }
+        public                  string              FullName                { get { return _fullName;                                                                           } }
+        public                  string              FamilyName              { get { return _familyName;                                                                         } }
+        public                  bool                Bold                    { get { return string.Compare(_weight, "bold", StringComparison.InvariantCultureIgnoreCase) == 0;   } }
+        public                  bool                Italic                  { get { return _italicAngle < -1.0;                                                                 } }
+        public                  string              Weight                  { get { return _weight;                                                                             } }
+        public                  bool                IsCIDFont               { get { return _isCIDFont;                                                                          } }
+        public                  double              ItalicAngle             { get { return _italicAngle;                                                                        } }
+        public                  bool                IsFixedPitch            { get { return _isFixedPitch;                                                                       } }
+        public                  string              CharacterSet            { get { return _characterSet;                                                                       } }
+        public                  AfmRectangle        FontBBox                { get { return _fontBBox;                                                                           } }
+        public                  int                 UnderlinePosition       { get { return _underlinePosition;                                                                  } }
+        public                  int                 UnderlineThickness      { get { return _underlineThickness;                                                                 } }
+        public                  int                 CapHeight               { get { return _capHeight;                                                                          } }
+        public                  int                 XHeight                 { get { return _xheight;                                                                            } }
+        public                  int                 Ascender                { get { return _ascender;                                                                           } }
+        public                  int                 Descender               { get { return _descender;                                                                          } }
+        public                  int                 StdHW                   { get { return _stdHW;                                                                              } }
+        public                  int                 StdVW                   { get { return _stdVW;                                                                              } }
+        public                  AfmCharMetric[]     CharMetric              { get { return _charMetric;                                                                         } }
 
         public                  PdfDistance         CharWidth(PdfDistance FontSize, char c)
         {
@@ -80,7 +77,7 @@ namespace Jannesen.FileFormat.Pdf
 
             return new PdfDistance(fontSize.pnts * (double)width / 1000.0);
         }
-        public                  byte                Encode(char c)
+        public  static          byte                Encode(char c)
         {
             if (c >= 0x20 && c <= 0x7F)
                 return (byte)c;
@@ -210,7 +207,7 @@ namespace Jannesen.FileFormat.Pdf
             }
         }
 
-        protected                                   PdfFont(System.IO.BinaryReader reader)
+        internal                                    PdfFont(System.IO.BinaryReader reader)
         {
             _fontName           = reader.ReadString();
             _fullName           = reader.ReadString();
@@ -330,11 +327,13 @@ namespace Jannesen.FileFormat.Pdf
                 }
             }
             catch(Exception Err) {
-                throw new PdfException("Error parsing Afm file at line " + Reader.LineNo.ToString() + ".", Err);
+                throw new PdfException("Error parsing Afm file at line " + Reader.LineNo.ToString(CultureInfo.InvariantCulture) + ".", Err);
             }
         }
         public                  void                WriteTo(System.IO.BinaryWriter writer)
         {
+            if (writer is null) throw new ArgumentNullException(nameof(writer));
+
             writer.Write(_fontName);
             writer.Write(_fullName);
             writer.Write(_familyName);

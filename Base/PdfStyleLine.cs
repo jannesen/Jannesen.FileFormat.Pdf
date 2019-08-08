@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 
 namespace Jannesen.FileFormat.Pdf
 {
@@ -10,7 +6,7 @@ namespace Jannesen.FileFormat.Pdf
     {
         public  readonly static     PdfStyleLine        SolidBlack1pt = new PdfStyleLine(PdfColorCMYK.ncBlack, new PdfDistance(1.0), PdfLineCapStyle.Butt, PdfLineJoinStyle.Bevel, 1.0, null, new PdfDistance(0));
 
-        private                     bool                _locked;
+        private readonly            bool                _locked;
         private                     PdfColor            _lineColor;
         private                     PdfDistance         _lineWidth;
         private                     PdfLineCapStyle     _capStyle;
@@ -106,6 +102,8 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfStyleLine(PdfStyleLine style)
         {
+            if (style is null) throw new ArgumentNullException(nameof(style));
+
             _locked     = false;
             _lineColor  = style._lineColor;
             _lineWidth  = style._lineWidth;
@@ -117,6 +115,8 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfStyleLine(PdfColor lineColor, PdfDistance lineWidth)
         {
+            if (lineColor is null) throw new ArgumentNullException(nameof(lineColor));
+
             _locked     = true;
             _lineColor  = lineColor;
             _lineWidth  = lineWidth;
@@ -128,9 +128,11 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfStyleLine(PdfColor lineColor, PdfDistance lineWith, PdfLineCapStyle CapStyle, PdfLineJoinStyle joinStyle, double miterLimit, PdfDistance[] dashArray, PdfDistance dashPhase)
         {
+            if (lineColor is null) throw new ArgumentNullException(nameof(lineColor));
+
             _locked     = true;
             _lineColor  = lineColor;
-            _lineWidth  = LineWidth;
+            _lineWidth  = lineWith;
             _capStyle   = CapStyle;
             _joinStyle  = joinStyle;
             _miterLimit = miterLimit;

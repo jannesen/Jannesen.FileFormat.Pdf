@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 
 namespace Jannesen.FileFormat.Pdf
 {
@@ -12,11 +8,11 @@ namespace Jannesen.FileFormat.Pdf
         public  static  readonly    PdfColorCMYK        ncBlack         = new PdfColorCMYK(0, 0, 0, 1);
         public  static  readonly    PdfColorCMYK        ncWhite         = new PdfColorCMYK(0, 0, 0, 0);
 
-        private                     bool                _locked;
-        public                      double              _cyan;
-        public                      double              _magenta;
-        public                      double              _yellow;
-        public                      double              _black;
+        private readonly            bool                _locked;
+        private                     double              _cyan;
+        private                     double              _magenta;
+        private                     double              _yellow;
+        private                     double              _black;
 
         public  override            string              ColorSpace
         {
@@ -75,6 +71,8 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfColorCMYK(PdfColorCMYK color)
         {
+            if (color is null) throw new ArgumentNullException(nameof(color));
+
             _locked  = false;
             _cyan    = color._cyan;
             _magenta = color._magenta;

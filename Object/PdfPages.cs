@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Jannesen.FileFormat.Pdf.Internal;
@@ -29,7 +25,7 @@ namespace Jannesen.FileFormat.Pdf
         public  const           int                     MaxKids = 16;
 
         private                 int                     _count;
-        private                 List<PdfPage_s>         _pages;
+        private readonly        List<PdfPage_s>         _pages;
 
         public                  int                     Count
         {
@@ -45,9 +41,6 @@ namespace Jannesen.FileFormat.Pdf
             get {
                 return _pages;
             }
-            set {
-                _pages = value;
-            }
         }
 
         public                                          PdfPages()
@@ -55,7 +48,7 @@ namespace Jannesen.FileFormat.Pdf
             _pages  = new List<PdfPage_s>(MaxKids);
         }
 
-        public  override    void                        pdfWriteToDocument(PdfDocumentWriter Document, PdfStreamWriter Writer)
+        internal override       void                    pdfWriteToDocument(PdfDocumentWriter Document, PdfStreamWriter Writer)
         {
             Writer.WriteDictionaryBegin();
 

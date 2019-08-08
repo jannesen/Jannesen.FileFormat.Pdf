@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Text;
 using Jannesen.FileFormat.Pdf.Internal;
 
@@ -26,27 +22,27 @@ namespace Jannesen.FileFormat.Pdf
         {
         }
 
-        public  override    void                    pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter Writer)
+        internal override       void                pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
         {
-            Writer.WriteDictionaryBegin();
-            Writer.WriteName("Type");
-            Writer.WriteName("Catalog");
+            writer.WriteDictionaryBegin();
+            writer.WriteName("Type");
+            writer.WriteName("Catalog");
 
             if (_pages != null) {
-                Writer.WriteName("Pages");
-                Writer.WriteReference(document, _pages);
+                writer.WriteName("Pages");
+                writer.WriteReference(document, _pages);
             }
 
-            Writer.WriteName("ViewerPreferences");
-            Writer.WriteDictionaryBegin();
-                Writer.WriteName("PrintScaling");
-                Writer.WriteName("None");
-            Writer.WriteDictionaryEnd();
+            writer.WriteName("ViewerPreferences");
+            writer.WriteDictionaryBegin();
+                writer.WriteName("PrintScaling");
+                writer.WriteName("None");
+            writer.WriteDictionaryEnd();
 
-            Writer.WriteName("PageLayout");
-            Writer.WriteName("SinglePage");
+            writer.WriteName("PageLayout");
+            writer.WriteName("SinglePage");
 
-            Writer.WriteDictionaryEnd();
+            writer.WriteDictionaryEnd();
         }
     }
 }

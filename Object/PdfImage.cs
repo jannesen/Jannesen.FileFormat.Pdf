@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.IO;
 using System.Text;
 using System.Reflection;
@@ -36,6 +32,8 @@ namespace Jannesen.FileFormat.Pdf
 
         public                                  PdfImage(Stream imageStream)
         {
+            if (imageStream is null) throw new ArgumentNullException(nameof(imageStream));
+
             byte[]      Header = new byte[16];
 
             imageStream.Read(Header, 0, 16);
@@ -56,6 +54,8 @@ namespace Jannesen.FileFormat.Pdf
         }
         public  static          PdfImage        LoadFromFile(string fileName)
         {
+            if (fileName is null) throw new ArgumentNullException(nameof(fileName));
+
             try {
                 using (FileStream imageStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
@@ -68,6 +68,9 @@ namespace Jannesen.FileFormat.Pdf
         }
         public  static          PdfImage        LoadFromAssambly(Assembly assembly, string name)
         {
+            if (assembly is null) throw new ArgumentNullException(nameof(assembly));
+            if (name is null) throw new ArgumentNullException(nameof(name));
+
             Stream imageStream = null;
 
             try {
@@ -87,7 +90,7 @@ namespace Jannesen.FileFormat.Pdf
             }
         }
 
-        public  override        void            pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
+        internal override       void            pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
         {
             writer.WriteDictionaryBegin();
             {

@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,8 +6,8 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 {
     public class TableRow: TableColumnRow
     {
-        private                 TableBox            _table;
-        private                 TableCells          _cells;
+        private readonly        TableBox            _table;
+        private readonly        TableCells          _cells;
         private                 PdfDistance         _top;
         private                 PdfDistance         _height;
 
@@ -52,7 +48,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
             _cells    = new TableCells(this, colSpans);
         }
 
-        public                  void                boxSetTopHeight(PdfDistance top, PdfDistance height)
+        internal                void                boxSetTopHeight(PdfDistance top, PdfDistance height)
         {
             _top    = top;
             _height = height;
@@ -61,7 +57,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
     public class TableRows: List<TableRow>
     {
-        private                 TableBox            _table;
+        private readonly        TableBox            _table;
 
         public                                      TableRows(TableBox table)
         {

@@ -1,15 +1,11 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Jannesen.FileFormat.Pdf.Internal;
 
 namespace Jannesen.FileFormat.Pdf
 {
-    public class PdfWriterReference
+    internal class PdfWriterReference
     {
         public                  int                     Id                  { get; private set; }
         public                  int                     Position            { get ; set; }
@@ -48,9 +44,7 @@ namespace Jannesen.FileFormat.Pdf
         public                  PdfObjectReader         Object
         {
             get {
-                var obj = Value as PdfObjectReader;
-
-                if (obj == null)
+                if (!(Value is PdfObjectReader obj))
                     throw new InvalidOperationException("Object expected.");
 
                 return obj;
@@ -80,11 +74,11 @@ namespace Jannesen.FileFormat.Pdf
             this.CompressedObj = compressObj;
         }
 
-        public  override        void                    pdfReadAll()
+        internal override       void                    pdfReadAll()
         {
             Value.pdfReadAll();
         }
-        public  override        void                    pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
+        internal override       void                    pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
         {
             writer.WriteReference(document, Value);
         }

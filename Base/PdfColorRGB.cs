@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 
 namespace Jannesen.FileFormat.Pdf
 {
@@ -15,10 +11,10 @@ namespace Jannesen.FileFormat.Pdf
         public  static  readonly    PdfColorRGB         ncBlue          = new PdfColorRGB(  0,   0, 100);
         public  static  readonly    PdfColorRGB         ncWhite         = new PdfColorRGB(100, 100, 100);
 
-        private                     bool                _locked;
-        public                      double              _red;
-        public                      double              _green;
-        public                      double              _blue;
+        private readonly            bool                _locked;
+        private                     double              _red;
+        private                     double              _green;
+        private                     double              _blue;
 
         public  override            string              ColorSpace
         {
@@ -66,6 +62,8 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfColorRGB(PdfColorRGB color)
         {
+            if (color is null) throw new ArgumentNullException(nameof(color));
+
             _locked = false;
             _red    = color._red;
             _green  = color._green;
@@ -74,7 +72,7 @@ namespace Jannesen.FileFormat.Pdf
         public                                          PdfColorRGB(double red, double green, double blue)
         {
             _locked = true;
-            _red   = Red;
+            _red   = red;
             _green = green;
             _blue  = blue;
         }

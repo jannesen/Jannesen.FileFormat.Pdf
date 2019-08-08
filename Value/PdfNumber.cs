@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Jannesen.FileFormat.Pdf.Internal;
@@ -11,7 +7,7 @@ namespace Jannesen.FileFormat.Pdf
 {
     public class PdfNumber: PdfValue
     {
-        private                 double                  _value;
+        private readonly        double                  _value;
 
         public override         PdfValueType            Type        { get { return PdfValueType.Number;     } }
         public                  double                  Value       { get { return _value;                  } }
@@ -21,7 +17,7 @@ namespace Jannesen.FileFormat.Pdf
             this._value = value;
         }
 
-        public  override        void                    pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
+        internal override       void                    pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
         {
             writer.WriteNumber(_value);
         }

@@ -1,14 +1,10 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.IO;
 using Jannesen.FileFormat.Pdf.Internal;
 
 namespace Jannesen.FileFormat.Pdf
 {
-    public class PdfFilter
+    public static class PdfFilter
     {
         public  static      Stream      GetCompressor(string filter, Stream output)
         {

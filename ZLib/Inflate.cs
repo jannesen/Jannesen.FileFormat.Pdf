@@ -34,6 +34,11 @@
  * and contributors of zlib.
  */
 
+#pragma warning disable IDE0051
+#pragma warning disable IDE0059
+#pragma warning disable CA1822
+#pragma warning disable CA1823
+
 namespace Jannesen.FileFormat.Pdf.ZLib
 {
 

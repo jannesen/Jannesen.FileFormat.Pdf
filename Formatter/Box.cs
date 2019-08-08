@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Jannesen.FileFormat.Pdf.Formatter
@@ -70,6 +66,8 @@ namespace Jannesen.FileFormat.Pdf.Formatter
         }
         public                  void                Print(PdfPoint upperLeftCorner, PdfContent content)
         {
+            if (content is null) throw new ArgumentNullException(nameof(content));
+
             Format();
 
             {
@@ -83,26 +81,26 @@ namespace Jannesen.FileFormat.Pdf.Formatter
             boxPrintForground(upperLeftCorner, content);
         }
 
-        public      virtual     void                boxPrintBackground(PdfPoint upperLeftCorner, PrintBackground background)
+        internal    virtual     void                boxPrintBackground(PdfPoint upperLeftCorner, PrintBackground background)
         {
         }
-        public      virtual     void                boxPrintForground(PdfPoint upperLeftCorner, PdfContent content)
+        internal    virtual     void                boxPrintForground(PdfPoint upperLeftCorner, PdfContent content)
         {
         }
-        public                  void                boxMoveTo(PdfDistance top, PdfDistance left)
+        internal                void                boxMoveTo(PdfDistance top, PdfDistance left)
         {
             _top  = top;
             _left = left;
         }
 
-        public                  void                boxLinkParent(Box parent)
+        internal                void                boxLinkParent(Box parent)
         {
             if (_parent != null)
                 throw new PdfException("Box already linked to parent.");
 
             _parent = parent;
         }
-        public                  void                boxUnlinkParent(Box parent)
+        internal                void                boxUnlinkParent(Box parent)
         {
             if (_parent != parent)
                 throw new PdfException("Internal error invalid UnlinkParent");
@@ -113,7 +111,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
     public class BoxList: List<Box>
     {
-        private                 Box                 _parent;
+        private readonly        Box                 _parent;
 
         public                  Box                 Parent
         {
@@ -129,11 +127,15 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public      new         void                Add(Box child)
         {
+            if (child is null) throw new ArgumentNullException(nameof(child));
+
             child.boxLinkParent(_parent);
             base.Add(child);
         }
         public      new         void                AddRange(IEnumerable<Box> list)
         {
+            if (list is null) throw new ArgumentNullException(nameof(list));
+
             foreach(Box child in list)
                 Add(child);
         }
@@ -143,17 +145,21 @@ namespace Jannesen.FileFormat.Pdf.Formatter
         }
         public      new         void                Insert(int index, Box child)
         {
+            if (child is null) throw new ArgumentNullException(nameof(child));
+
             child.boxLinkParent(_parent);
             base.Insert(index, child);
         }
         public      new         void                InsertRange(int index, IEnumerable<Box> list)
         {
+            if (list is null) throw new ArgumentNullException(nameof(list));
+
             foreach(Box child in list)
                 Insert(index++, child);
         }
         public      new         bool                Remove(Box child)
         {
-            if (!Remove(child))
+            if (child == null || !base.Remove(child))
                 return false;
 
             child.boxUnlinkParent(_parent);

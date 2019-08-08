@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -16,11 +12,11 @@ namespace Jannesen.FileFormat.Pdf
         public  static      PdfFontFamily       Symbol                  { get { return PdfStandard.Standard.FontFamilySymbol;       } }
         public  static      PdfFontFamily       ZapfDingbats            { get { return PdfStandard.Standard.FontFamilyZapfDingbats; } }
 
-        private             string              _familyName;
-        private             PdfStandardFont     _normal;
-        private             PdfStandardFont     _bold;
-        private             PdfStandardFont     _italic;
-        private             PdfStandardFont     _boldItalic;
+        private readonly    string              _familyName;
+        private readonly    PdfStandardFont     _normal;
+        private readonly    PdfStandardFont     _bold;
+        private readonly    PdfStandardFont     _italic;
+        private readonly    PdfStandardFont     _boldItalic;
 
         public  override    string              FamilyName
         {
@@ -88,6 +84,8 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                      void        WriteTo(System.IO.BinaryWriter stream)
         {
+            if (stream is null) throw new ArgumentNullException(nameof(stream));
+
             stream.Write(_familyName);
 
             stream.Write(_normal != null);

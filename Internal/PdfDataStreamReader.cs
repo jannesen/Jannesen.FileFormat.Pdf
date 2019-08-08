@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -10,12 +6,12 @@ namespace Jannesen.FileFormat.Pdf.Internal
 {
     public class PdfDataStreamReader: Stream
     {
-        private         Stream                  _stream;
-        private         int                     _startPosition;
-        private         int                     _length;
-        private         int                     _position;
+        private readonly        Stream                  _stream;
+        private readonly        int                     _startPosition;
+        private readonly        int                     _length;
+        private                 int                     _position;
 
-        internal                                PdfDataStreamReader(Stream stream, int startPosition, int length)
+        internal                                        PdfDataStreamReader(Stream stream, int startPosition, int length)
         {
             _stream        = stream;
             _startPosition = startPosition;
@@ -23,11 +19,11 @@ namespace Jannesen.FileFormat.Pdf.Internal
             _position      = 0;
         }
 
-        public override     bool                CanRead             { get { return true;        } }
-        public override     bool                CanSeek             { get { return true;        } }
-        public override     bool                CanWrite            { get { return false;       } }
-        public override     long                Length              { get { return _length;     } }
-        public override     long                Position
+        public override             bool                CanRead             { get { return true;        } }
+        public override             bool                CanSeek             { get { return true;        } }
+        public override             bool                CanWrite            { get { return false;       } }
+        public override             long                Length              { get { return _length;     } }
+        public override             long                Position
         {
             get {
                 return _position;
@@ -39,8 +35,8 @@ namespace Jannesen.FileFormat.Pdf.Internal
                 _position = (int)value;
             }
         }
-        public override     void                Flush()             { }
-        public override     long                Seek(long Offset, SeekOrigin Origin)
+        public override             void                Flush()             { }
+        public override             long                Seek(long Offset, SeekOrigin Origin)
         {
             long    newPosition;
 
@@ -58,11 +54,11 @@ namespace Jannesen.FileFormat.Pdf.Internal
 
             return newPosition;
         }
-        public override     void                SetLength(long Length)
+        public override             void                SetLength(long Length)
         {
             throw new NotSupportedException("Can't set length of a readonly stream.");
         }
-        public override     int                 Read(byte[] buf, int offset, int size)
+        public override             int                 Read(byte[] buf, int offset, int size)
         {
             if (size > _length - _position)
                 size = (int)(_length - _position);
@@ -79,7 +75,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
 
             return readSize;
         }
-        public override     int                 ReadByte()
+        public override             int                 ReadByte()
         {
             if (1 > _length - _position)
                 return -1;
@@ -90,11 +86,11 @@ namespace Jannesen.FileFormat.Pdf.Internal
 
             return b;
         }
-        public override     void                Write(byte[] Buf, int Offset, int Size)
+        public override             void                Write(byte[] Buf, int Offset, int Size)
         {
             throw new NotSupportedException("Can't write to a readonly stream.");
         }
-        public override     void                WriteByte(byte b)
+        public override             void                WriteByte(byte b)
         {
             throw new NotSupportedException("Can't write to a readonly stream.");
         }

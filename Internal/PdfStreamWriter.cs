@@ -1,9 +1,6 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
@@ -28,7 +25,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
         private readonly static         byte[]              bsRelative          = Encoding.ASCII.GetBytes(" R");
         private readonly static         byte[]              bsUnicodePrefix     = new byte[] { 254, 254, 255 };
 
-        private                         Stream              _pdfStream;         // The PDF data stream
+        private readonly                Stream              _pdfStream;         // The PDF data stream
         private                         int                 _pdfPosition;       // Position in PDF stream.
         private                         PdfValueType        _previousValue;     // of the last writen token
 
@@ -52,12 +49,12 @@ namespace Jannesen.FileFormat.Pdf.Internal
             _previousValue = PdfValueType.None;
         }
 
-        public                          PdfStreamWriter     ResetState()
+        internal                        PdfStreamWriter     ResetState()
         {
             _previousValue = PdfValueType.None;
             return this;
         }
-        public                          void                WriteRectangle(PdfRectangle rectangle)
+        internal                        void                WriteRectangle(PdfRectangle rectangle)
         {
             WriteArrayBegin();
             WriteNumber(rectangle.llx.pnts);
@@ -66,7 +63,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
             WriteNumber(rectangle.ury.pnts);
             WriteArrayEnd();
         }
-        public                          void                WriteNull()
+        internal                        void                WriteNull()
         {
             switch (_previousValue) {
             case PdfValueType.None:
@@ -82,7 +79,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
             WriteByteArray(bsNull);
             _previousValue = PdfValueType.Null;
         }
-        public                          void                WriteBoolean(bool value)
+        internal                        void                WriteBoolean(bool value)
         {
             switch (_previousValue) {
             case PdfValueType.None:
@@ -98,7 +95,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
             WriteByteArray((value) ? bsTrue : bsFalse);
             _previousValue = PdfValueType.Boolean;
         }
-        public                          void                WriteInteger(int value)
+        internal                        void                WriteInteger(int value)
         {
             switch (_previousValue) {
             case PdfValueType.None:
@@ -137,7 +134,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
 
             _previousValue = PdfValueType.Integer;
         }
-        public                          void                WriteNumber(double value)
+        internal                        void                WriteNumber(double value)
         {
             switch (_previousValue) {
             case PdfValueType.None:
@@ -204,7 +201,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
 
             _previousValue = PdfValueType.Number;
         }
-        public                          void                WriteName(string name)
+        internal                        void                WriteName(string name)
         {
             WriteByte((byte)'/');
 
@@ -224,7 +221,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
 
             _previousValue = PdfValueType.Name;
         }
-        public                          void                WriteString(string value)
+        internal                        void                WriteString(string value)
         {
             int     Length = value.Length;
             bool    unicode = false;
@@ -283,7 +280,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
                 _previousValue = PdfValueType.String;
             }
         }
-        public                          void                WriteStringHex(byte[] value)
+        internal                        void                WriteStringHex(byte[] value)
         {
             WriteByte((byte)'<');
 
@@ -294,7 +291,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
 
             _previousValue = PdfValueType.HexadecimalString;
         }
-        public                          void                WriteStringRaw(byte[] value)
+        internal                        void                WriteStringRaw(byte[] value)
         {
             WriteByte((byte)'(');
             WriteByteArray(value, 0, value.Length);
@@ -302,15 +299,15 @@ namespace Jannesen.FileFormat.Pdf.Internal
 
             _previousValue = PdfValueType.String;
         }
-        public                          void                WriteDate(DateTime dt)
+        internal                        void                WriteDate(DateTime dt)
         {
-            WriteString(dt.ToString("D:yyyyMMddhhmmss+00"));
+            WriteString(dt.ToString("D:yyyyMMddhhmmss+00", CultureInfo.InvariantCulture));
         }
-        public                          void                WriteReference(PdfDocumentWriter document, PdfValue value)
+        internal                        void                WriteReference(PdfDocumentWriter document, PdfValue value)
         {
             WriteReference(document.AddObj(value));
         }
-        public                          void                WriteReference(PdfWriterReference reference)
+        internal                        void                WriteReference(PdfWriterReference reference)
         {
             WriteInteger(reference.Id);
             WriteInteger(0);
@@ -318,43 +315,43 @@ namespace Jannesen.FileFormat.Pdf.Internal
             _previousValue = PdfValueType.Reference;
         }
 
-        public                          void                WriteNewLine()
+        internal                        void                WriteNewLine()
         {
             WriteByte((byte)'\n');
             _previousValue = PdfValueType.None;
         }
-        public                          void                WriteSeparator()
+        internal                        void                WriteSeparator()
         {
             WriteByte((byte)' ');
             _previousValue = PdfValueType.None;
         }
-        public                          void                WriteDictionaryBegin()
+        internal                        void                WriteDictionaryBegin()
         {
             WriteByteArray(bsDictionaryBegin);
             _previousValue = PdfValueType.DictionaryBegin;
         }
-        public                          void                WriteDictionaryEnd()
+        internal                        void                WriteDictionaryEnd()
         {
             WriteByteArray(bsDictionaryEnd);
             _previousValue = PdfValueType.DictionaryEnd;
         }
-        public                          void                WriteArrayBegin()
+        internal                        void                WriteArrayBegin()
         {
             WriteByte((byte)'[');
 
             _previousValue = PdfValueType.ArrayBegin;
         }
-        public                          void                WriteArrayEnd()
+        internal                        void                WriteArrayEnd()
         {
             WriteByte((byte)']');
             _previousValue = PdfValueType.ArrayEnd;
         }
-        public                          void                WriteFileHeader()
+        internal                        void                WriteFileHeader()
         {
             WriteByteArray(PdfStreamWriter.bsFileHeader);
             _previousValue = PdfValueType.None;
         }
-        public                          void                WriteXrefHeader(int cnt)
+        internal                        void                WriteXrefHeader(int cnt)
         {
             WriteByteArray(PdfStreamWriter.bsXref);
             _previousValue = PdfValueType.None;
@@ -362,12 +359,12 @@ namespace Jannesen.FileFormat.Pdf.Internal
             WriteInteger(cnt);
             WriteNewLine();
         }
-        public                          void                WriteTrailer()
+        internal                        void                WriteTrailer()
         {
             WriteByteArray(PdfStreamWriter.bsTrailer);
             _previousValue = PdfValueType.None;
         }
-        public                          void                WriteEOF(int pos)
+        internal                        void                WriteEOF(int pos)
         {
             WriteByteArray(PdfStreamWriter.bsStartXref);
             _previousValue = PdfValueType.None;
@@ -375,7 +372,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
             WriteNewLine();
             WriteByteArray(PdfStreamWriter.bsFileEOF);
         }
-        public                          void                WriteObj(PdfDocumentWriter document, PdfWriterReference reference, PdfValue obj)
+        internal                        void                WriteObj(PdfDocumentWriter document, PdfWriterReference reference, PdfValue obj)
         {
             WriteInteger(reference.Id);
             WriteInteger(0);
@@ -383,14 +380,14 @@ namespace Jannesen.FileFormat.Pdf.Internal
             obj.pdfWriteToDocument(document, this);
             WriteObjEnd();
         }
-        public                          void                WriteStream(byte[] streamData, int dataLength)
+        internal                        void                WriteStream(byte[] streamData, int dataLength)
         {
             WriteByteStr(bsStreamBegin);
             WriteByteArray(streamData, 0, dataLength);
             WriteByteArray(bsStreamEnd);
             _previousValue = PdfValueType.StreamEnd;
         }
-        public                          void                WriteStream(Stream stream, int dataLength)
+        internal                        void                WriteStream(Stream stream, int dataLength)
         {
             byte[]  buf  = new byte[4096];
 
@@ -410,17 +407,17 @@ namespace Jannesen.FileFormat.Pdf.Internal
             WriteByteArray(bsStreamEnd);
             _previousValue = PdfValueType.StreamEnd;
         }
-        public                          void                WriteObjBegin()
+        internal                        void                WriteObjBegin()
         {
             WriteByteStr(bsObjBegin);
             _previousValue = PdfValueType.ObjectBegin;
         }
-        public                          void                WriteObjEnd()
+        internal                        void                WriteObjEnd()
         {
             WriteByteArray(bsObjEnd);
             _previousValue = PdfValueType.ObjectEnd;
         }
-        public                          void                WriteByteStr(byte[] str)
+        internal                        void                WriteByteStr(byte[] str)
         {
             switch (_previousValue) {
             case PdfValueType.None:
@@ -440,28 +437,28 @@ namespace Jannesen.FileFormat.Pdf.Internal
             WriteByteArray(str);
             _previousValue = PdfValueType.ByteStr;
         }
-        public                          void                WriteHex(char chr)
+        internal                        void                WriteHex(char chr)
         {
             WriteByte(_nibleToHex(chr >> 12));
             WriteByte(_nibleToHex(chr >> 8));
             WriteByte(_nibleToHex(chr >> 4));
             WriteByte(_nibleToHex(chr     ));
         }
-        public                          void                WriteHex(byte b)
+        internal                        void                WriteHex(byte b)
         {
             WriteByte(_nibleToHex(b >> 4));
             WriteByte(_nibleToHex(b     ));
         }
-        public                          void                WriteByteArray(byte[] ba)
+        internal                        void                WriteByteArray(byte[] ba)
         {
             WriteByteArray(ba, 0, ba.Length);
         }
-        public                          void                WriteByteArray(byte[] ba, int offset, int length)
+        internal                        void                WriteByteArray(byte[] ba, int offset, int length)
         {
             _pdfStream.Write(ba, offset, length);
             _pdfPosition += length;
         }
-        public                          void                WriteByte(byte b)
+        internal                        void                WriteByte(byte b)
         {
             _pdfStream.WriteByte(b);
             _pdfPosition++;

@@ -1,12 +1,8 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 
 namespace Jannesen.FileFormat.Pdf
 {
-    public struct PdfRectangle
+    public struct PdfRectangle: IEquatable<PdfRectangle>
     {
         public              PdfDistance     llx;
         public              PdfDistance     lly;
@@ -51,6 +47,10 @@ namespace Jannesen.FileFormat.Pdf
             }
 
             return false;
+        }
+        public              bool            Equals(PdfRectangle other)
+        {
+            return this == other;
         }
         public  override    int             GetHashCode()
         {

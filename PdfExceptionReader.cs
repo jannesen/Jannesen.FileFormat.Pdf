@@ -1,8 +1,5 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace Jannesen.FileFormat.Pdf
 {
@@ -13,6 +10,9 @@ namespace Jannesen.FileFormat.Pdf
         {
         }
         public      PdfExceptionReader(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+        protected   PdfExceptionReader(SerializationInfo info, StreamingContext context): base(info, context)
         {
         }
     }

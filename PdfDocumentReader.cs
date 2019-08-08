@@ -1,9 +1,6 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using Jannesen.FileFormat.Pdf.Internal;
@@ -13,8 +10,8 @@ namespace Jannesen.FileFormat.Pdf
     public sealed class PdfDocumentReader: PdfDocument, IDisposable
     {
         private             Stream                      _stream;
-        private             bool                        _leaveOpen;             // Close stream on finise
-        private             int                         _fileVersion;
+        private readonly    bool                        _leaveOpen;             // Close stream on finise
+        private readonly    int                         _fileVersion;
         private             PdfReferenceReader[]        _xrefTable;
         private             PdfReferenceReader          _rootReference;
         private             PdfReferenceReader          _encryptReference;
@@ -22,6 +19,12 @@ namespace Jannesen.FileFormat.Pdf
         private             PdfValue[]                  _id;
         private             PdfDictionary[]             _pages;
 
+        public              int                         FileVersion
+        {
+            get {
+                return _fileVersion;
+            }
+        }
         public              PdfDictionary               EncryptDictionary
         {
             get {
@@ -43,14 +46,13 @@ namespace Jannesen.FileFormat.Pdf
                 return (PdfDictionary)_rootReference.Value;
             }
         }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
         public              PdfDictionary               PagesRoot
         {
             get {
                 var pages = RootDictionary.ValueByName<PdfDictionary>("Pages");
 
                 if (pages.NamedType != "Pages")
-                    throw new PdfExceptionReader("No pages in document catalog.");
+                    throw new InvalidOperationException("No pages in document catalog.");
 
                 return pages;
             }
@@ -96,6 +98,8 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfDocumentReader(Stream stream, bool leaveOpen)
         {
+            if (stream is null) throw new ArgumentNullException(nameof(stream));
+
             try {
                 if (!stream.CanSeek) {
                     stream    = _copyStreamToMemory(stream, leaveOpen);
@@ -198,15 +202,14 @@ namespace Jannesen.FileFormat.Pdf
                     return obj;
                 }
                 else {
-                    var objStm = _xrefTable[reference.CompressedObj.Id].Value as PdfObjStmReader;
-                    if (objStm == null)
+                    if (!(_xrefTable[reference.CompressedObj.Id].Value is PdfObjStmReader objStm))
                         throw new PdfException("Obj not ObjStm.");
 
                     return _readObj(new PdfStreamReader(this,  objStm.GetStream(reference.Position, reference.Id), 0), true);
                 }
             }
             catch(Exception err) {
-                throw new PdfExceptionReader("Can't read object "+reference.Id.ToString()+"/"+reference.Revision.ToString()+".", err);
+                throw new PdfExceptionReader("Can't read object " + reference.Id.ToString(CultureInfo.InvariantCulture) + "/" + reference.Revision.ToString(CultureInfo.InvariantCulture) + ".", err);
             }
         }
 
@@ -230,10 +233,6 @@ namespace Jannesen.FileFormat.Pdf
                     _constructPages(kid.Resolve<PdfDictionary>(), pages);
                 break;
             }
-        }
-        private             PdfReferenceReader          _getObjectReference(PdfReferenceID reference)
-        {
-            return (reference != null) ? pdfGetReference(reference.Id, reference.Revision) : null;
         }
         private             int                         _readHeader()
         {
@@ -397,8 +396,7 @@ namespace Jannesen.FileFormat.Pdf
             reader.ReadToken(PdfValueType.ObjectBegin);
             _allocateXrefTable(id + 1);
             var rr  = new PdfReferenceReader(this, id, revision, pos);
-            var obj = _readObj(reader, false) as PdfObjectReader;
-            if (obj == null)
+            if (!(_readObj(reader, false) is PdfObjectReader obj))
                 throw new PdfExceptionReader("Invalid Xref obj.");
             rr.setValue(obj);
             _xrefTable[id] = rr;

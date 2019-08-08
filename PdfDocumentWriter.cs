@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -14,9 +10,9 @@ namespace Jannesen.FileFormat.Pdf
     {
         private             PdfStreamWriter                             _writer;
         private             bool                                        _compressContent;       // Compress content
-        private             bool                                        _closeOnFinish;         // Close stream on finise
+        private readonly    bool                                        _closeOnFinish;         // Close stream on finise
         private             List<PdfWriterReference>                    _xrefTable;             // xref Table.
-        private             Dictionary<PdfValue, PdfWriterReference>    _referenceTable;
+        private readonly    Dictionary<PdfValue, PdfWriterReference>    _referenceTable;
         private             PdfDocumentInfo                             _documentInfo;          // Document info obj.
         private             PdfCatalog                                  _catalog;               // Catalog obj.
         private             List<PdfPage_s>                             _pages;                 // Pages
@@ -46,6 +42,8 @@ namespace Jannesen.FileFormat.Pdf
 
         public                                      PdfDocumentWriter(Stream stream, bool closeOnFinish)
         {
+            if (stream is null) throw new ArgumentNullException(nameof(stream));
+
             try {
                 _writer           = new PdfStreamWriter(stream);
                 _compressContent  = true;
@@ -114,7 +112,7 @@ namespace Jannesen.FileFormat.Pdf
         {
             AddObj(new PdfPage(pageSize, content));
         }
-        public              PdfWriterReference      AddObj(PdfValue obj)
+        internal            PdfWriterReference      AddObj(PdfValue obj)
         {
             if (!_referenceTable.TryGetValue(obj, out var reference)) {
                 obj.pdfAddToDocument(this);
@@ -136,7 +134,7 @@ namespace Jannesen.FileFormat.Pdf
 
             return reference;
         }
-        public              PdfWriterReference      GetReference(PdfValue obj)
+        internal            PdfWriterReference      GetReference(PdfValue obj)
         {
             return _referenceTable[obj];
         }

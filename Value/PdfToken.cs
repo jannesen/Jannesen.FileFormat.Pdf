@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Jannesen.FileFormat.Pdf.Internal;
@@ -20,7 +16,7 @@ namespace Jannesen.FileFormat.Pdf
         public static readonly  PdfToken                StreamEnd   = new PdfToken(PdfValueType.StreamEnd);
         public static readonly  PdfToken                Reference   = new PdfToken(PdfValueType.Reference);
 
-        private                 PdfValueType            _type;
+        private readonly        PdfValueType            _type;
 
         public override         PdfValueType            Type        { get { return _type;                   } }
 
@@ -29,7 +25,7 @@ namespace Jannesen.FileFormat.Pdf
             this._type = type;
         }
 
-        public  override        void                    pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
+        internal override       void                    pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
         {
             throw new PdfExceptionWriter("Can't write PdfToken.");
         }

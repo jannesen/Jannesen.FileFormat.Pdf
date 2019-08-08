@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -10,16 +6,15 @@ using Jannesen.FileFormat.Pdf.Internal;
 
 namespace Jannesen.FileFormat.Pdf
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     public sealed class PdfObjStmReader: PdfObject
     {
-        private                 int[]                       _ints;
-        private                 byte[]                      _data;
+        private readonly        int[]                       _ints;
+        private readonly        byte[]                      _data;
 
         public  override        PdfValueType                Type        { get => PdfValueType.Object; }
         public  override        string                      NamedType   { get => "ObjStm"; }
 
-        public                                              PdfObjStmReader(PdfDocumentReader documentReader, PdfObjectReader objReader)
+        internal                                            PdfObjStmReader(PdfDocumentReader documentReader, PdfObjectReader objReader)
         {
             int n2    = objReader.Dictionary.ValueByName<PdfInteger>("N", resolve:false).Value * 2;
             int first = objReader.Dictionary.ValueByName<PdfInteger>("First", resolve:false).Value;
@@ -56,7 +51,7 @@ namespace Jannesen.FileFormat.Pdf
 
             return new PdfDataBufReader(_data, pos, end - pos);
         }
-        public  override        void                        pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
+        internal override       void                        pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
         {
             throw new NotSupportedException();
         }

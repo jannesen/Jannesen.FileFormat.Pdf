@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -66,6 +62,8 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public                  void                            DrawLineHorizontal(PdfStyleLine lineStyle, PdfPoint begin, PdfDistance length)
         {
+            if (lineStyle is null) throw new ArgumentNullException(nameof(lineStyle));
+
             if (_horizontalLines == null)
                 _horizontalLines = new Lines();
 
@@ -73,6 +71,8 @@ namespace Jannesen.FileFormat.Pdf.Formatter
         }
         public                  void                            DrawLineVertical(PdfStyleLine lineStyle, PdfPoint begin, PdfDistance length)
         {
+            if (lineStyle is null) throw new ArgumentNullException(nameof(lineStyle));
+
             if (_verticalLines == null)
                 _verticalLines   = new Lines();
 
@@ -80,6 +80,8 @@ namespace Jannesen.FileFormat.Pdf.Formatter
         }
         public                  void                            DrawLineDiagonal(PdfStyleLine lineStyle, PdfPoint begin, PdfSize size)
         {
+            if (lineStyle is null) throw new ArgumentNullException(nameof(lineStyle));
+
             if (_diagonalLines == null)
                 _diagonalLines   = new Lines();
 
@@ -88,6 +90,8 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public                  void                            Print(PdfContent content)
         {
+            if (content is null) throw new ArgumentNullException(nameof(content));
+
             if (_horizontalLines != null)
                 _horizontalLines.Print(content);
 

@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Jannesen.FileFormat.Pdf.Internal;
@@ -66,18 +62,18 @@ namespace Jannesen.FileFormat.Pdf
         public  abstract        PdfValueType            Type        { get ; }
         public  virtual         bool                    hasStream   { get => false;               }
 
-        public  abstract        void                    pdfWriteToDocument(PdfDocumentWriter Document, PdfStreamWriter Writer);
-        public  virtual         void                    pdfReadAll()
+        internal abstract       void                    pdfWriteToDocument(PdfDocumentWriter Document, PdfStreamWriter Writer);
+        internal virtual        void                    pdfReadAll()
         {
         }
-        public  virtual         void                    pdfAddToDocument(PdfDocumentWriter documentWriter)
+        internal virtual        void                    pdfAddToDocument(PdfDocumentWriter documentWriter)
         {
         }
     }
 
     public class PdfValueList : List<PdfValue>
     {
-        public                  PdfValueType            pdfReadChildren(PdfStreamReader reader, PdfValueType endValueType)
+        internal                PdfValueType            pdfReadChildren(PdfStreamReader reader, PdfValueType endValueType)
         {
             PdfValue token;
 
@@ -107,7 +103,7 @@ error:              throw new PdfException("Unexpected token "+token.Type.ToStri
 
             return token.Type;
         }
-        public                  void                    pdfReadReference(PdfStreamReader reader)
+        internal                void                    pdfReadReference(PdfStreamReader reader)
         {
             if (!(base.Count >= 2 &&
                   base[base.Count-2] is PdfInteger &&
@@ -121,20 +117,20 @@ error:              throw new PdfException("Unexpected token "+token.Type.ToStri
 
             base.Add(reader.Document.pdfGetReference(id, revision));
         }
-        public                  void                    pdfReadArray(PdfStreamReader reader)
+        internal                void                    pdfReadArray(PdfStreamReader reader)
         {
             base.Add(new PdfArray(reader));
         }
-        public                  void                    pdfReadDictionary(PdfStreamReader reader)
+        internal                void                    pdfReadDictionary(PdfStreamReader reader)
         {
             base.Add(new PdfDictionary(reader));
         }
-        public                  void                    pdfReadAll()
+        internal                void                    pdfReadAll()
         {
             for (int i = 0 ; i < Count ; ++i)
                 base[i].pdfReadAll();
         }
-        public                  void                    pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
+        internal                void                    pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
         {
             for (int i = 0 ; i < Count ; ++i)
                 base[i].pdfWriteToDocument(document, writer);

@@ -1,21 +1,18 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace Jannesen.FileFormat.Pdf
 {
-    public class PdfParse
+    internal static class PdfParse
     {
         public  static  PdfColor            Color(string str)
         {
-            if (string.Compare(str, 0, "rgb ", 0, 4, true) == 0)
+            if (string.Compare(str, 0, "rgb ", 0, 4, StringComparison.InvariantCultureIgnoreCase) == 0)
                 return ColorRGB(str.Substring(4));
 
-            if (string.Compare(str, 0, "cmyk ", 0, 4, true) == 0)
+            if (string.Compare(str, 0, "cmyk ", 0, 4, StringComparison.InvariantCultureIgnoreCase) == 0)
                 return ColorCMYK(str.Substring(5));
 
             throw new PdfException("Unknown colorspace in color '"+str+"'.");
@@ -37,10 +34,10 @@ namespace Jannesen.FileFormat.Pdf
 
                     for (int i = 0 ; i < 4 ; ++i) {
                         try {
-                            Values[i] = double.Parse(Parts[i]);
+                            Values[i] = double.Parse(Parts[i], System.Globalization.NumberStyles.Integer, CultureInfo.InvariantCulture);
 
                             if (Values[i]< 0 || Values[i]>100)
-                                throw new ArgumentOutOfRangeException();
+                                throw new PdfException("value out of range.");
                         }
                         catch(Exception) {
                             throw new PdfException("Invalid cmyk-color '" + str + "'.");
@@ -68,14 +65,14 @@ namespace Jannesen.FileFormat.Pdf
                     double[]    Values = new double[4];
 
                     if (Parts.Length != 3)
-                        throw new PdfException("Invalid cmyk-color '" + str + "'.");
+                        throw new PdfException("Invalid RGB-color '" + str + "'.");
 
                     for (int i = 0 ; i < 3 ; ++i) {
                         try {
-                            Values[i] = double.Parse(Parts[i]);
+                            Values[i] = double.Parse(Parts[i], System.Globalization.NumberStyles.Integer, CultureInfo.InvariantCulture);
 
                             if (Values[i]< 0 || Values[i]>100)
-                                throw new ArgumentOutOfRangeException();
+                                throw new PdfException("value out of range.");
                         }
                         catch(Exception) {
                             throw new PdfException("Invalid cmyk-color '" + str + "'.");
@@ -92,22 +89,22 @@ namespace Jannesen.FileFormat.Pdf
 
             str = str.Trim();
 
-            if (str.EndsWith("mm")) {
+            if (str.EndsWith("mm", StringComparison.InvariantCulture)) {
                 factor = 2.8125;
                 str    = str.Substring(0, str.Length - 2);
             }
             else
-            if (str.EndsWith("cm")) {
+            if (str.EndsWith("cm", StringComparison.InvariantCulture)) {
                 factor = 28.125;
                 str    = str.Substring(0, str.Length - 2);
             }
             else
-            if (str.EndsWith("pt")) {
+            if (str.EndsWith("pt", StringComparison.InvariantCulture)) {
                 factor = 1;
                 str    = str.Substring(0, str.Length - 2);
             }
             else
-            if (str.EndsWith("inch")) {
+            if (str.EndsWith("inch", StringComparison.InvariantCulture)) {
                 factor = 72;
                 str    = str.Substring(0, str.Length - 4);
             }

@@ -1,8 +1,4 @@
-﻿/*@
-    Copyright � Jannesen Holding B.V. 2006-2010.
-    Unautorised reproduction, distribution or reverse eniginering is prohibited.
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,7 +6,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 {
     public class TableColumn: TableColumnRow
     {
-        private                 TableBox            _table;
+        private readonly        TableBox            _table;
         private                 PdfDistance         _setLeft;
         private                 PdfDistance         _setWidth;
 
@@ -49,10 +45,13 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
     public class TableColumns: List<TableColumn>
     {
-        private                 TableBox            _table;
+        private readonly        TableBox            _table;
 
         public                                      TableColumns(TableBox table, PdfDistance[] columWidth)
         {
+            if (table is null) throw new ArgumentNullException(nameof(table));
+            if (columWidth is null) throw new ArgumentNullException(nameof(columWidth));
+
             _table    = table;
 
             PdfDistance left = PdfDistance.Zero;

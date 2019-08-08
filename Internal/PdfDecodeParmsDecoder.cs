@@ -5,15 +5,15 @@ namespace Jannesen.FileFormat.Pdf.Internal
 {
     class PdfDecodeParmsDecoder: Stream
     {
-        private                 Stream          _inputStream;
-        private                 int             _predictor;
-        private                 int             _columns;
-        private                 int             _colors;
-        private                 int             _bpc;
-        private                 int             _bytesPerPixel;
-        private                 int             _bytesPerRow;
-        private                 byte[]          _prior;
-        private                 byte[]          _curr;
+        private readonly        Stream          _inputStream;
+        private readonly        int             _predictor;
+        private readonly        int             _columns;
+        private readonly        int             _colors;
+        private readonly        int             _bpc;
+        private readonly        int             _bytesPerPixel;
+        private readonly        int             _bytesPerRow;
+        private readonly        byte[]          _prior;
+        private readonly        byte[]          _curr;
         private                 int             _curr_pos;
 
         public      override    long            Position    { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
