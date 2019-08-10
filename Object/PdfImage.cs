@@ -57,8 +57,7 @@ namespace Jannesen.FileFormat.Pdf
             if (fileName is null) throw new ArgumentNullException(nameof(fileName));
 
             try {
-                using (FileStream imageStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
+                using (FileStream imageStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read)) {
                     return new PdfImage(imageStream);
                 }
             }

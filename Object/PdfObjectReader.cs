@@ -62,10 +62,8 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  byte[]                      GetUncompressData()
         {
-            using (MemoryStream OutputStream = new MemoryStream())
-            {
-                using (Stream InputStream = GetUncompressStream())
-                {
+            using (MemoryStream OutputStream = new MemoryStream()) {
+                using (Stream InputStream = GetUncompressStream()) {
                     int     rtn;
                     byte[]  buf = new byte[4096];
 

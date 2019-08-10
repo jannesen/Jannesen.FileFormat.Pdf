@@ -252,16 +252,14 @@ namespace Jannesen.FileFormat.Pdf
         }
         private             void                    _writeTrailer()
         {
-            using (var compressStream = new StreamBuffer())
-            {
+            using (var compressStream = new StreamBuffer()) {
                 var posXrefTable = _writer.PdfPosition;
                 var objref       = new PdfWriterReference(_xrefTable.Count) { Position  = _writer.PdfPosition };
                 _xrefTable.Add(objref);
 
                 string  filter = "FlateDecode";
 
-                using (var compressWriter = PdfFilter.GetCompressor(filter, compressStream))
-                {
+                using (var compressWriter = PdfFilter.GetCompressor(filter, compressStream)) {
                     byte[]  buf = new byte[6];
 
                     for (int i = 0 ; i < _xrefTable.Count ; ++i) {

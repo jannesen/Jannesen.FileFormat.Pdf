@@ -34,8 +34,7 @@ namespace Jannesen.FileFormat.Pdf
                     _ints[i] = reader.ReadInt();
             }
 
-            using (var sbuf = new MemoryStream())
-            {
+            using (var sbuf = new MemoryStream()) {
                 stream.CopyTo(sbuf);
                 _data = sbuf.ToArray();
             }

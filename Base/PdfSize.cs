@@ -20,7 +20,7 @@ namespace Jannesen.FileFormat.Pdf
 
         public  static      bool    operator == (PdfSize p1, PdfSize p2)
         {
-			return p1.width  == p2.width &&
+            return p1.width  == p2.width &&
                    p1.height == p2.height;
         }
         public  static      bool    operator != (PdfSize p1, PdfSize p2)

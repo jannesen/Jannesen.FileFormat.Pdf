@@ -732,8 +732,7 @@ namespace Jannesen.FileFormat.Pdf
         internal override       void                                pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
         {
             if (document.CompressContent) {
-                using (var compressStream = new StreamBuffer())
-                {
+                using (var compressStream = new StreamBuffer()) {
                     string  Filter = "FlateDecode";
 
                     using (Stream CompressWriter = PdfFilter.GetCompressor(Filter, compressStream))
@@ -781,8 +780,7 @@ namespace Jannesen.FileFormat.Pdf
         {
             byte[]  buf = new byte[4096];
 
-            using (Stream Source = obj.GetUncompressStream())
-            {
+            using (Stream Source = obj.GetUncompressStream()) {
                 int rsize;
 
                 while ((rsize = Source.Read(buf, 0, buf.Length)) > 0)

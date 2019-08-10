@@ -255,8 +255,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
             try {
                 Hashtable glyphList = new Hashtable(10000);
 
-                using (Stream stream = new FileStream("GlyphNameList.txt", FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
+                using (Stream stream = new FileStream("GlyphNameList.txt", FileMode.Open, FileAccess.Read, FileShare.Read)) {
                     if (stream == null)
                         throw new PdfException("Can't open resource 'Jannesen.FileFormat.Pdf.Data.GlyphList.txt'.");
 

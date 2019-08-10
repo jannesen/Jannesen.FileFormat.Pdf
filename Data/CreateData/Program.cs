@@ -12,8 +12,7 @@ namespace Serialize
             try {
 //              PdfData data = PdfStandard.Standard;
 
-                using (BinaryWriter writer = new BinaryWriter(new FileStream(@"..\Data.bin", FileMode.Create, FileAccess.Write, FileShare.None)))
-                {
+                using (BinaryWriter writer = new BinaryWriter(new FileStream(@"..\Data.bin", FileMode.Create, FileAccess.Write, FileShare.None))) {
                     PdfData.ReadFromFiles().WriteTo(writer);
                 }
             }

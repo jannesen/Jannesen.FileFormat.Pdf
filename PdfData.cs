@@ -18,8 +18,7 @@ namespace Jannesen.FileFormat.Pdf
         {
             PdfData     rtn = new PdfData() { _standardFonts = new Dictionary<string, PdfFont>() };
 
-            using (BinaryReader reader = new BinaryReader(typeof(PdfData).Assembly.GetManifestResourceStream("Jannesen.FileFormat.Pdf.Data.bin")))
-            {
+            using (BinaryReader reader = new BinaryReader(typeof(PdfData).Assembly.GetManifestResourceStream("Jannesen.FileFormat.Pdf.Data.bin"))) {
                 rtn.FontFamilyCourier      = new PdfStandardFontFamily(reader);
                 rtn.FontFamilyHelvetica    = new PdfStandardFontFamily(reader);
                 rtn.FontFamilyTimesRoman   = new PdfStandardFontFamily(reader);

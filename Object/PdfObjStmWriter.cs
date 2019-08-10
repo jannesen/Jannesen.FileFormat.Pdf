@@ -36,12 +36,10 @@ namespace Jannesen.FileFormat.Pdf
 
         internal override       void                        pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
         {
-            using (var compressStream = new StreamBuffer())
-            {
+            using (var compressStream = new StreamBuffer()) {
                 string  filter = "FlateDecode";
 
-                using (var compressWriter = PdfFilter.GetCompressor(filter, compressStream))
-                {
+                using (var compressWriter = PdfFilter.GetCompressor(filter, compressStream)) {
                     compressWriter.Write(_intBuffer.GetBuffer(),  0, (int)_intBuffer.Length);
                     compressWriter.Write(_dataBuffer.GetBuffer(), 0, (int)_dataBuffer.Length);
                 }

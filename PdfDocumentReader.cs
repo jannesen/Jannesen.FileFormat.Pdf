@@ -433,8 +433,7 @@ namespace Jannesen.FileFormat.Pdf
 
             _allocateXrefTable(((PdfInteger)index[1]).Value);
 
-            using (var r = new PdfXrefStreamReader(obj.GetUncompressStream()))
-            {
+            using (var r = new PdfXrefStreamReader(obj.GetUncompressStream())) {
                 while (!r.EOF) {
                     int     t  = r.ReadValue(s1);
                     int     v2 = r.ReadValue(s2);

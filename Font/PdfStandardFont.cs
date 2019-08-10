@@ -14,8 +14,7 @@ namespace Jannesen.FileFormat.Pdf
         internal                                    PdfStandardFont(string dataName)
         {
             try {
-                using (Stream Stream = new FileStream(dataName, FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
+                using (Stream Stream = new FileStream(dataName, FileMode.Open, FileAccess.Read, FileShare.Read)) {
                     if (Stream == null)
                         throw new PdfException("Can't open resource '"+dataName+"'.");
 

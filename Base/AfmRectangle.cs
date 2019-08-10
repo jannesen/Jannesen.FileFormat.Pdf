@@ -28,7 +28,7 @@ namespace Jannesen.FileFormat.Pdf
 
         public  static      bool    operator == (AfmRectangle p1, AfmRectangle p2)
         {
-			return p1.llX == p2.llX &&
+            return p1.llX == p2.llX &&
                    p1.llY == p2.llY &&
                    p1.urX == p2.urX &&
                    p1.urY == p2.urY;
