@@ -70,7 +70,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
             }
 
             for (int i = 0 ; i < Count ; ++i) {
-                if (base[i].Name.StartsWith(prefix, StringComparison.InvariantCulture))
+                if (base[i].Name.StartsWith(prefix, StringComparison.Ordinal))
                     name = base[i].Name;
             }
 

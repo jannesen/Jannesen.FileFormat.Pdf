@@ -31,7 +31,7 @@ namespace Jannesen.FileFormat.Pdf
         public                  string              FontName                { get { return _fontName;                                                                           } }
         public                  string              FullName                { get { return _fullName;                                                                           } }
         public                  string              FamilyName              { get { return _familyName;                                                                         } }
-        public                  bool                Bold                    { get { return string.Compare(_weight, "bold", StringComparison.InvariantCultureIgnoreCase) == 0;   } }
+        public                  bool                Bold                    { get { return string.Compare(_weight, "bold", StringComparison.OrdinalIgnoreCase) == 0;   } }
         public                  bool                Italic                  { get { return _italicAngle < -1.0;                                                                 } }
         public                  string              Weight                  { get { return _weight;                                                                             } }
         public                  bool                IsCIDFont               { get { return _isCIDFont;                                                                          } }

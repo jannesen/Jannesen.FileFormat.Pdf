@@ -9,10 +9,10 @@ namespace Jannesen.FileFormat.Pdf
     {
         public  static  PdfColor            Color(string str)
         {
-            if (string.Compare(str, 0, "rgb ", 0, 4, StringComparison.InvariantCultureIgnoreCase) == 0)
+            if (string.Compare(str, 0, "rgb ", 0, 4, StringComparison.OrdinalIgnoreCase) == 0)
                 return ColorRGB(str.Substring(4));
 
-            if (string.Compare(str, 0, "cmyk ", 0, 4, StringComparison.InvariantCultureIgnoreCase) == 0)
+            if (string.Compare(str, 0, "cmyk ", 0, 4, StringComparison.OrdinalIgnoreCase) == 0)
                 return ColorCMYK(str.Substring(5));
 
             throw new PdfException("Unknown colorspace in color '"+str+"'.");
@@ -89,22 +89,22 @@ namespace Jannesen.FileFormat.Pdf
 
             str = str.Trim();
 
-            if (str.EndsWith("mm", StringComparison.InvariantCulture)) {
+            if (str.EndsWith("mm", StringComparison.Ordinal)) {
                 factor = 2.8125;
                 str    = str.Substring(0, str.Length - 2);
             }
             else
-            if (str.EndsWith("cm", StringComparison.InvariantCulture)) {
+            if (str.EndsWith("cm", StringComparison.Ordinal)) {
                 factor = 28.125;
                 str    = str.Substring(0, str.Length - 2);
             }
             else
-            if (str.EndsWith("pt", StringComparison.InvariantCulture)) {
+            if (str.EndsWith("pt", StringComparison.Ordinal)) {
                 factor = 1;
                 str    = str.Substring(0, str.Length - 2);
             }
             else
-            if (str.EndsWith("inch", StringComparison.InvariantCulture)) {
+            if (str.EndsWith("inch", StringComparison.Ordinal)) {
                 factor = 72;
                 str    = str.Substring(0, str.Length - 4);
             }
