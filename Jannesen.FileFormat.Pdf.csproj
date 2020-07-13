@@ -1,24 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5DDDD8A2-7BE2-4DD8-B039-AB1082581453}</ProjectGuid>
-    <OutputType>Library</OutputType>
     <RootNamespace>Jannesen.FileFormat.Pdf</RootNamespace>
     <AssemblyName>Jannesen.FileFormat.Pdf</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>net4;netcoreapp3.1</TargetFrameworks>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <FileAlignment>512</FileAlignment>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>false</Prefer32Bit>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Jannesen.FileFormat.Pdf.snk</AssemblyOriginatorKeyFile>
+    <Company>Jannesen B.V.</Company>
+    <Version>1.10.00.000</Version>
+    <RepositoryUrl>https://github.com/jannesen/Jannesen.FileFormat.Pdf</RepositoryUrl>
+    <Authors>Peter Jannesen</Authors>    
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -26,130 +21,24 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
-  <!-- Import CodeAnalysis if package exists in upper directory -->
-  <Import Condition="Exists($([MSBuild]::GetPathOfFileAbove('code-analysis-package.vsprops')))" Project="$([MSBuild]::GetPathOfFileAbove('code-analysis-package.vsprops'))" />
+
   <ItemGroup>
-    <Reference Include="System" />
+    <Compile Remove="Data\CreateData\**" />
+    <EmbeddedResource Remove="Data\CreateData\**" />
+    <None Remove="Data\CreateData\**" />
   </ItemGroup>
+  
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Base\AfmCharMetric.cs" />
-    <Compile Include="Base\AfmRectangle.cs" />
-    <Compile Include="Base\PdfColor.cs" />
-    <Compile Include="Base\PdfColorCMYK.cs" />
-    <Compile Include="Base\PdfColorRGB.cs" />
-    <Compile Include="Base\PdfDistances.cs" />
-    <Compile Include="Base\PdfLineCapStyle.cs" />
-    <Compile Include="Base\PdfLineJoinStyle.cs" />
-    <Compile Include="Base\PdfOverflow.cs" />
-    <Compile Include="Base\PdfPageSize.cs" />
-    <Compile Include="Base\PdfParse.cs" />
-    <Compile Include="Base\PdfPoint.cs" />
-    <Compile Include="Base\PdfRectangle.cs" />
-    <Compile Include="Base\PdfSize.cs" />
-    <Compile Include="Base\PdfStyleFill.cs" />
-    <Compile Include="Base\PdfStyleLine.cs" />
-    <Compile Include="Base\PdfStyleText.cs" />
-    <Compile Include="Base\PdfTextAlign.cs" />
-    <Compile Include="Font\PdfFontFamily.cs" />
-    <Compile Include="Font\PdfStandardFont.cs" />
-    <Compile Include="Font\PdfStandardFontFamily.cs" />
-    <Compile Include="Formatter\Barcode39Box.cs" />
-    <Compile Include="Formatter\Border.cs" />
-    <Compile Include="Formatter\Box.cs" />
-    <Compile Include="Formatter\ContainerBox.cs" />
-    <Compile Include="Formatter\MarginPadding.cs" />
-    <Compile Include="Formatter\PrintBackground.cs" />
-    <Compile Include="Formatter\TableBox.cs" />
-    <Compile Include="Formatter\TableCell.cs" />
-    <Compile Include="Formatter\TableColumn.cs" />
-    <Compile Include="Formatter\TableColumnRow.cs" />
-    <Compile Include="Formatter\TableRow.cs" />
-    <Compile Include="Formatter\TextBox.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Internal\AfmReader.cs" />
-    <Compile Include="Internal\PdfDataBufReader.cs" />
-    <Compile Include="Internal\PdfDataStreamReader.cs" />
-    <Compile Include="Internal\PdfXrefStreamReader.cs" />
-    <Compile Include="Internal\PdfDecodeParmsDecoder.cs" />
-    <Compile Include="Internal\PdfFilter.cs" />
-    <Compile Include="Internal\PdfReferenceID.cs" />
-    <Compile Include="Internal\PdfResourceEntry.cs" />
-    <Compile Include="Internal\PdfStreamReader.cs" />
-    <Compile Include="Internal\PdfStreamWriter.cs" />
-    <Compile Include="Internal\StreamBuffer.cs" />
-    <Compile Include="Object\PdfCatalog.cs" />
-    <Compile Include="Object\PdfContent.cs" />
-    <Compile Include="Object\PdfDocumentInfo.cs" />
-    <Compile Include="Object\PdfFont.cs" />
-    <Compile Include="Object\PdfImage.cs" />
-    <Compile Include="Object\PdfObject.cs" />
-    <Compile Include="Object\PdfObjStmWriter.cs" />
-    <Compile Include="Object\PdfObjStmReader.cs" />
-    <Compile Include="Object\PdfObjectReader.cs" />
-    <Compile Include="Object\PdfPage.cs" />
-    <Compile Include="Object\PdfPages.cs" />
-    <Compile Include="PdfData.cs" />
-    <Compile Include="PdfDocument.cs" />
-    <Compile Include="PdfDocumentReader.cs" />
-    <Compile Include="PdfDocumentWriter.cs" />
-    <Compile Include="PdfException.cs" />
-    <Compile Include="PdfExceptionReader.cs" />
-    <Compile Include="PdfExceptionWriter.cs" />
-    <Compile Include="PdfStandard.cs" />
-    <Compile Include="Value\PdfArray.cs" />
-    <Compile Include="Value\PdfBoolean.cs" />
-    <Compile Include="Value\PdfDictionary.cs" />
-    <Compile Include="Value\PdfInteger.cs" />
-    <Compile Include="Value\PdfName.cs" />
-    <Compile Include="Value\PdfNull.cs" />
-    <Compile Include="Value\PdfNumber.cs" />
-    <Compile Include="Value\PdfReference.cs" />
-    <Compile Include="Value\PdfString.cs" />
-    <Compile Include="Value\PdfToken.cs" />
-    <Compile Include="Value\PdfValue.cs" />
-    <Compile Include="ZLib\Adler32.cs" />
-    <Compile Include="ZLib\Deflate.cs" />
-    <Compile Include="ZLib\InfBlocks.cs" />
-    <Compile Include="ZLib\InfCodes.cs" />
-    <Compile Include="ZLib\Inflate.cs" />
-    <Compile Include="ZLib\InfTree.cs" />
-    <Compile Include="ZLib\StaticTree.cs" />
-    <Compile Include="ZLib\Tree.cs" />
-    <Compile Include="ZLib\ZDeflaterOutputStream.cs" />
-    <Compile Include="ZLib\ZInflaterInputStream.cs" />
-    <Compile Include="ZLib\Zlib.cs" />
-    <Compile Include="ZLib\ZStream.cs" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Data.bin" />
-    <None Include="Data\Courier-Bold.afm" />
-    <None Include="Data\Courier-BoldOblique.afm" />
-    <None Include="Data\Courier-Oblique.afm" />
-    <None Include="Data\Courier.afm" />
-    <None Include="Data\Helvetica-Bold.afm" />
-    <None Include="Data\Helvetica-BoldOblique.afm" />
-    <None Include="Data\Helvetica-Oblique.afm" />
-    <None Include="Data\Helvetica.afm" />
-    <None Include="Data\Symbol.afm" />
-    <None Include="Data\Times-Bold.afm" />
-    <None Include="Data\Times-BoldItalic.afm" />
-    <None Include="Data\Times-Italic.afm" />
-    <None Include="Data\Times-Roman.afm" />
-    <None Include="Data\ZapfDingbats.afm" />
-    <None Include="Data\GlyphNameList.txt" />
-    <None Include="Data\mustRead.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Jannesen.FileFormat.Pdf.snk" />
-    <None Include="LICENSE.txt" />
-    <None Include="README.md" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

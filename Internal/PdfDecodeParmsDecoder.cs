@@ -50,6 +50,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
         }
         protected   override    void            Dispose(bool disposing)
         {
+            base.Dispose(disposing);
             if (disposing) {
                 _inputStream.Dispose();
             }
