@@ -387,17 +387,17 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  void                                opSetStrokeColor(PdfColor color)
         {
-            if (color is PdfColorRGB) {
-                WriteNumber(((PdfColorRGB)color).Red,   4, true);
-                WriteNumber(((PdfColorRGB)color).Green, 4, true);
-                WriteNumber(((PdfColorRGB)color).Blue,  4, true);
+            if (color is PdfColorRGB rgb) {
+                WriteNumber(rgb.Red,   4, true);
+                WriteNumber(rgb.Green, 4, true);
+                WriteNumber(rgb.Blue,  4, true);
             }
             else
-            if (color is PdfColorCMYK) {
-                WriteNumber(((PdfColorCMYK)color).Cyan,    4, true);
-                WriteNumber(((PdfColorCMYK)color).Magenta, 4, true);
-                WriteNumber(((PdfColorCMYK)color).Yellow,  4, true);
-                WriteNumber(((PdfColorCMYK)color).Black,   4, true);
+            if (color is PdfColorCMYK cmyk) {
+                WriteNumber(cmyk.Cyan,    4, true);
+                WriteNumber(cmyk.Magenta, 4, true);
+                WriteNumber(cmyk.Yellow,  4, true);
+                WriteNumber(cmyk.Black,   4, true);
             }
 
             WriteStr(bs_SC);
@@ -405,23 +405,23 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  void                                opSetNonStrokeColor(PdfColor color)
         {
-            if (color is PdfColorRGB) {
+            if (color is PdfColorRGB rgb) {
                 if (_curNonStrokeColorSpace != "DeviceRGB")
                     throw new PdfException("Can't set RGB Color, Invalid device colorspace "+_curStrokeColorSpace+" selected.");
 
-                WriteNumber(((PdfColorRGB)color).Red,   4, true);
-                WriteNumber(((PdfColorRGB)color).Green, 4, true);
-                WriteNumber(((PdfColorRGB)color).Blue,  4, true);
+                WriteNumber(rgb.Red,   4, true);
+                WriteNumber(rgb.Green, 4, true);
+                WriteNumber(rgb.Blue,  4, true);
             }
             else
-            if (color is PdfColorCMYK) {
+            if (color is PdfColorCMYK cmyk) {
                 if (_curNonStrokeColorSpace != "DeviceCMYK")
                     throw new PdfException("Can't set CMYK Color, Invalid device colorspace "+_curStrokeColorSpace+" selected.");
 
-                WriteNumber(((PdfColorCMYK)color).Cyan,    4, true);
-                WriteNumber(((PdfColorCMYK)color).Magenta, 4, true);
-                WriteNumber(((PdfColorCMYK)color).Yellow,  4, true);
-                WriteNumber(((PdfColorCMYK)color).Black,   4, true);
+                WriteNumber(cmyk.Cyan,    4, true);
+                WriteNumber(cmyk.Magenta, 4, true);
+                WriteNumber(cmyk.Yellow,  4, true);
+                WriteNumber(cmyk.Black,   4, true);
             }
 
             WriteStr(bs_sc);
@@ -725,8 +725,8 @@ namespace Jannesen.FileFormat.Pdf
                 writer.AddObj(Parent);
 
             for(int i = 0 ; i<_resources.Count ; ++i) {
-                if (_resources[i].Resource is PdfObject)
-                    writer.AddObj((PdfObject)(_resources[i].Resource));
+                if (_resources[i].Resource is PdfObject obj)
+                    writer.AddObj(obj);
             }
         }
         internal override       void                                pdfWriteToDocument(PdfDocumentWriter document, PdfStreamWriter writer)
@@ -872,8 +872,8 @@ namespace Jannesen.FileFormat.Pdf
         {
             var contents = page.ValueByName("Contents");
 
-            if (contents is PdfArray) {
-                var         contentsArray = ((PdfArray)contents).Children;
+            if (contents is PdfArray pdfArray) {
+                var         contentsArray = pdfArray.Children;
                 PdfContent  Parent        = null;
 
                 for (int i = 0 ; i < contentsArray.Count - 1 ; ++i) {
@@ -889,9 +889,9 @@ namespace Jannesen.FileFormat.Pdf
                 _parent = Parent;
                 _readContent(((PdfReferenceReader)contentsArray[contentsArray.Count - 1]).Object);
             }
-            else if (contents is PdfReferenceReader)
+            else if (contents is PdfReferenceReader pdfRR)
             {
-                _readContent(((PdfReferenceReader)contents).Object);
+                _readContent(pdfRR.Object);
             }
             else
                 throw new PdfExceptionReader("Unknown Content " + contents.GetType().Name);
