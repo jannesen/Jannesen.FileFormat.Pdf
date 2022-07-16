@@ -49,8 +49,6 @@ using System.IO;
  * http://www.lowagie.com/iText/
  */
 
-#pragma warning disable IDE0044 // Add readonly modifier
-
 namespace Jannesen.FileFormat.Pdf.ZLib
 {
     /// <summary>

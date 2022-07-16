@@ -1,4 +1,6 @@
 .vs/*
 bin/*
 obj/*
+Data/CreateData/bin/*
+Data/CreateData/obj/*
 *.csproj.user

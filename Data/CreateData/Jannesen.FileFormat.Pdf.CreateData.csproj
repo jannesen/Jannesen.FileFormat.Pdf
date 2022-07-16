@@ -3,10 +3,12 @@
     <RootNamespace>Serialize</RootNamespace>
     <AssemblyName>Serialize</AssemblyName>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net46</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Authors>Peter Jannesen</Authors>    
   </PropertyGroup>
   
@@ -32,12 +34,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Jannesen.FileFormat.Pdf.csproj">
-      <Project>{5dddd8a2-7be2-4dd8-b039-ab1082581453}</Project>
       <Name>Jannesen.FileFormat.Pdf</Name>
     </ProjectReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="LICENSE" />
-  </ItemGroup>
 </Project>

@@ -33,8 +33,6 @@
  * Jean-loup Gailly(jloup@gzip.org) and Mark Adler(madler@alumni.caltech.edu)
  * and contributors of zlib.
  */
-#pragma warning disable CA1707
-#pragma warning disable CA1724
 
 namespace Jannesen.FileFormat.Pdf.ZLib
 {
