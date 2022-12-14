@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Jannesen.FileFormat.Pdf.Internal
 {
-    class StreamBuffer: MemoryStream
+    sealed class StreamBuffer: MemoryStream
     {
         public  override    void    Close()
         {

@@ -5,7 +5,7 @@ using Jannesen.FileFormat.Pdf.Internal;
 
 namespace Jannesen.FileFormat.Pdf
 {
-    internal class PdfWriterReference
+    internal sealed class PdfWriterReference
     {
         public                  int                     Id                  { get; private set; }
         public                  int                     Position            { get ; set; }

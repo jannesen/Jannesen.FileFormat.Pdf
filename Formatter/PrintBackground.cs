@@ -6,7 +6,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 {
     public class PrintBackground
     {
-        private class Line
+        private sealed class Line
         {
             public  readonly    PdfStyleLine    LineStyle;
             public              PdfPoint        Begin;
@@ -20,7 +20,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
             }
         }
 
-        private class Lines : List<Line>
+        private sealed class Lines : List<Line>
         {
             public              void            Add(PdfStyleLine lineStyle, PdfPoint begin, PdfPoint end)
             {

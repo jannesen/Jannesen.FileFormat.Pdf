@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Jannesen.FileFormat.Pdf.Internal
 {
-    class PdfDecodeParmsDecoder: Stream
+    sealed class PdfDecodeParmsDecoder: Stream
     {
         private readonly        Stream          _inputStream;
         private readonly        int             _predictor;

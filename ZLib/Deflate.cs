@@ -46,7 +46,7 @@ namespace Jannesen.FileFormat.Pdf.ZLib
         private const int MAX_WBITS=15;            // 32K LZ77 window
         private const int DEF_MEM_LEVEL=8;
 
-        internal class Config{
+        internal sealed class Config{
             internal int good_length; // reduce lazy search above this match length
             internal int max_lazy;    // do not perform lazy search above this match length
             internal int nice_length; // quit search above this match length
