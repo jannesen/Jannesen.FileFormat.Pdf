@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using Jannesen.FileFormat.Pdf.Internal;
 
@@ -17,6 +18,8 @@ namespace Jannesen.FileFormat.Pdf
         private             PdfCatalog                                  _catalog;               // Catalog obj.
         private             List<PdfPage_s>                             _pages;                 // Pages
         private             List<PdfValue>                              _objToWrite;            // List of obj to write
+        private             Guid                                        _id1;
+        private             Guid                                        _id2;
 
         public              PdfStreamWriter         Writer
         {
@@ -53,7 +56,9 @@ namespace Jannesen.FileFormat.Pdf
                 _documentInfo     = new PdfDocumentInfo();
                 _catalog          = new PdfCatalog();
                 _pages            = new List<PdfPage_s>();
-                _objToWrite   = new List<PdfValue>();
+                _objToWrite       = new List<PdfValue>();
+                _id1              = Guid.NewGuid();
+                _id2              = Guid.NewGuid();
                 _xrefTable.Add(null);
 
                 _writer.WriteFileHeader();
@@ -108,6 +113,11 @@ namespace Jannesen.FileFormat.Pdf
             Dispose();
         }
 
+        public              void                    SetID(Guid id1, Guid id2)
+        {
+            _id1 = id1;
+            _id2 = id2;
+        }
         public              void                    AddPage(PdfSize pageSize, PdfContent content)
         {
             AddObj(new PdfPage(pageSize, content));
@@ -174,81 +184,6 @@ namespace Jannesen.FileFormat.Pdf
             var r = _referenceTable[obj];
             r.Position = _writer.PdfPosition;
             _writer.WriteObj(this, r, obj);
-        }
-        private             void                    _writeTrailer14()
-        {
-        // Write xref table
-            int     posXrefTable = _writer.PdfPosition;
-
-            _writer.WriteXrefHeader(_xrefTable.Count);
-
-            {
-                int             v;
-                int             p;
-                byte[]          buf   = new byte[20];
-
-                for(int ObjectID = 0 ; ObjectID < _xrefTable.Count ; ++ObjectID) {
-                    PdfWriterReference  entry = _xrefTable[ObjectID];
-
-                    v = (entry != null) ? entry.Position : 0;
-                    for (p = 0 ; p < 10 ; ++p) {
-                        buf[9 - p] = (byte)('0' + (v % 10));
-                        v /= 10;
-                    }
-
-                    buf[10] = (byte)' ';
-
-                    v = (entry != null) ? 0 : 65535;
-                    for (p = 0 ; p < 5 ; ++p) {
-                        buf[15 - p] = (byte)('0' + (v % 10));
-                        v /= 10;
-                    }
-
-                    buf[16] = (byte)' ';
-                    buf[17] = (byte)((entry != null) ? 'n' : 'f');
-                    buf[18] = (byte)' ';
-                    buf[19] = (byte)'\n';
-
-                    _writer.WriteByteArray(buf, 0, 20);
-                }
-            }
-
-        // write trailer
-            _writer.WriteTrailer();
-            _writer.WriteDictionaryBegin();
-            {
-                // Size
-                {
-                    _writer.WriteName("Size");
-                    _writer.WriteInteger(_xrefTable.Count);
-                }
-
-                // Root
-                {
-                    _writer.WriteName("Root");
-                    _writer.WriteReference(GetReference(_catalog));
-                }
-
-                // Info
-                {
-                    _writer.WriteName("Info");
-                    _writer.WriteReference(GetReference(_documentInfo));
-                }
-
-                // ID
-                {
-                    _writer.WriteName("ID");
-                    _writer.WriteArrayBegin();
-                        _writer.WriteStringHex(System.Guid.NewGuid().ToByteArray());
-                        _writer.WriteStringHex(System.Guid.NewGuid().ToByteArray());
-                    _writer.WriteArrayEnd();
-                }
-            }
-            _writer.WriteDictionaryEnd();
-            _writer.WriteNewLine();
-
-        // write startxref and EOF
-            _writer.WriteEOF(posXrefTable);
         }
         private             void                    _writeTrailer()
         {
@@ -325,8 +260,8 @@ namespace Jannesen.FileFormat.Pdf
 
                 _writer.WriteName("ID");
                     _writer.WriteArrayBegin();
-                        _writer.WriteStringHex(System.Guid.NewGuid().ToByteArray());
-                        _writer.WriteStringHex(System.Guid.NewGuid().ToByteArray());
+                        _writer.WriteStringHex(_id1.ToByteArray());
+                        _writer.WriteStringHex(_id2.ToByteArray());
                     _writer.WriteArrayEnd();
 
                 _writer.WriteName("Filter");
