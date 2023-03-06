@@ -137,8 +137,10 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
             for(int l = 0 ; l < _lines.Length ; ++l) {
                 upperLeftCorner.y.pnts -= LineHeight.pnts;
-                content.SetTextMatrixH(upperLeftCorner + new PdfPoint(_lines[l].Left, YOffset));
-                content.opShowText(Text, _lines[l].StrBegin, _lines[l].StrLength);
+                if (_lines[l].StrLength > 0) {
+                    content.SetTextMatrixH(upperLeftCorner + new PdfPoint(_lines[l].Left, YOffset));
+                    content.opShowText(Text, _lines[l].StrBegin, _lines[l].StrLength);
+                }
             }
         }
 
