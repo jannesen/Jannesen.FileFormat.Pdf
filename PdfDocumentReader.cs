@@ -479,7 +479,7 @@ namespace Jannesen.FileFormat.Pdf
                 _xrefTable = NewTable;
             }
         }
-        private static      Stream                      _copyStreamToMemory(Stream stream, bool leaveOpen)
+        private static      MemoryStream                _copyStreamToMemory(Stream stream, bool leaveOpen)
         {
             MemoryStream    MemoryStream = new MemoryStream();
             byte[]          Buf          = new byte[4096];
