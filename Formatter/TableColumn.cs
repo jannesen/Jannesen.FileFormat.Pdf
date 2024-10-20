@@ -49,8 +49,8 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public                                      TableColumns(TableBox table, PdfDistance[] columWidth)
         {
-            if (table is null) throw new ArgumentNullException(nameof(table));
-            if (columWidth is null) throw new ArgumentNullException(nameof(columWidth));
+            ArgumentNullException.ThrowIfNull(table);
+            ArgumentNullException.ThrowIfNull(columWidth);
 
             _table    = table;
 

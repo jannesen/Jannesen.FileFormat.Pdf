@@ -32,14 +32,14 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfStyleFill(PdfStyleFill style)
         {
-            if (style is null) throw new ArgumentNullException(nameof(style));
+            ArgumentNullException.ThrowIfNull(style);
 
             _fillColor  = style._fillColor;
             _locked     = false;
         }
         public                                          PdfStyleFill(PdfColor fillColor)
         {
-            if (fillColor is null) throw new ArgumentNullException(nameof(fillColor));
+            ArgumentNullException.ThrowIfNull(fillColor);
 
             _fillColor  = fillColor;
             _locked     = true;

@@ -66,7 +66,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
         }
         public                  void                Print(PdfPoint upperLeftCorner, PdfContent content)
         {
-            if (content is null) throw new ArgumentNullException(nameof(content));
+            ArgumentNullException.ThrowIfNull(content);
 
             Format();
 
@@ -127,14 +127,14 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public      new         void                Add(Box child)
         {
-            if (child is null) throw new ArgumentNullException(nameof(child));
+            ArgumentNullException.ThrowIfNull(child);
 
             child.boxLinkParent(_parent);
             base.Add(child);
         }
         public      new         void                AddRange(IEnumerable<Box> list)
         {
-            if (list is null) throw new ArgumentNullException(nameof(list));
+            ArgumentNullException.ThrowIfNull(list);
 
             foreach(Box child in list)
                 Add(child);
@@ -145,14 +145,14 @@ namespace Jannesen.FileFormat.Pdf.Formatter
         }
         public      new         void                Insert(int index, Box child)
         {
-            if (child is null) throw new ArgumentNullException(nameof(child));
+            ArgumentNullException.ThrowIfNull(child);
 
             child.boxLinkParent(_parent);
             base.Insert(index, child);
         }
         public      new         void                InsertRange(int index, IEnumerable<Box> list)
         {
-            if (list is null) throw new ArgumentNullException(nameof(list));
+            ArgumentNullException.ThrowIfNull(list);
 
             foreach(Box child in list)
                 Insert(index++, child);

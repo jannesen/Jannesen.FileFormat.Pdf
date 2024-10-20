@@ -45,7 +45,7 @@ namespace Jannesen.FileFormat.Pdf
 
         public                                      PdfDocumentWriter(Stream stream, bool closeOnFinish)
         {
-            if (stream is null) throw new ArgumentNullException(nameof(stream));
+            ArgumentNullException.ThrowIfNull(stream);
 
             try {
                 _writer           = new PdfStreamWriter(stream);

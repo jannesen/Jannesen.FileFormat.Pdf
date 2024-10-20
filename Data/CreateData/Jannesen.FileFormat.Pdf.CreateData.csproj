@@ -1,41 +1,44 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <RootNamespace>Serialize</RootNamespace>
-    <AssemblyName>Serialize</AssemblyName>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net48</TargetFramework>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <AnalysisLevel>latest</AnalysisLevel>
-    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
-    <WarningLevel>4</WarningLevel>
-    <Authors>Peter Jannesen</Authors>    
-  </PropertyGroup>
-  
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-  </PropertyGroup>
-  
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-  </PropertyGroup>
-  
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Runtime.Serialization" />
-  </ItemGroup>
+    <PropertyGroup>
+        <RootNamespace>Serialize</RootNamespace>
+        <AssemblyName>Serialize</AssemblyName>
+        
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8</TargetFramework>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <Platforms>AnyCPU</Platforms>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Jannesen.FileFormat.Pdf.csproj">
-      <Name>Jannesen.FileFormat.Pdf</Name>
-    </ProjectReference>
-  </ItemGroup>
+        <Nullable>disable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+        <WarningLevel>4</WarningLevel>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Jannesen.FileFormat.Pdf.csproj">
+            <Name>Jannesen.FileFormat.Pdf</Name>
+        </ProjectReference>
+    </ItemGroup>
 
 </Project>

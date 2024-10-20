@@ -62,7 +62,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public                  void                            DrawLineHorizontal(PdfStyleLine lineStyle, PdfPoint begin, PdfDistance length)
         {
-            if (lineStyle is null) throw new ArgumentNullException(nameof(lineStyle));
+            ArgumentNullException.ThrowIfNull(lineStyle);
 
             if (_horizontalLines == null)
                 _horizontalLines = new Lines();
@@ -71,7 +71,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
         }
         public                  void                            DrawLineVertical(PdfStyleLine lineStyle, PdfPoint begin, PdfDistance length)
         {
-            if (lineStyle is null) throw new ArgumentNullException(nameof(lineStyle));
+            ArgumentNullException.ThrowIfNull(lineStyle);
 
             if (_verticalLines == null)
                 _verticalLines   = new Lines();
@@ -80,7 +80,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
         }
         public                  void                            DrawLineDiagonal(PdfStyleLine lineStyle, PdfPoint begin, PdfSize size)
         {
-            if (lineStyle is null) throw new ArgumentNullException(nameof(lineStyle));
+            ArgumentNullException.ThrowIfNull(lineStyle);
 
             if (_diagonalLines == null)
                 _diagonalLines   = new Lines();
@@ -90,7 +90,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public                  void                            Print(PdfContent content)
         {
-            if (content is null) throw new ArgumentNullException(nameof(content));
+            ArgumentNullException.ThrowIfNull(content);
 
             if (_horizontalLines != null)
                 _horizontalLines.Print(content);

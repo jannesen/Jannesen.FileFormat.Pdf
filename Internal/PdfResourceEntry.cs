@@ -26,7 +26,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
     {
         public              void                InitFrom(PdfResourceEntryList list)
         {
-            if (list is null) throw new ArgumentNullException(nameof(list));
+            ArgumentNullException.ThrowIfNull(list);
 
             base.Clear();
 
@@ -53,7 +53,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
         }
         public              string              GetName(PdfObject resource)
         {
-            if (resource is null) throw new ArgumentNullException(nameof(resource));
+            ArgumentNullException.ThrowIfNull(resource);
 
             PdfResourceEntry    Entry = FindByObject(resource);
             if (Entry != null)
@@ -75,7 +75,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
             }
 
             if (name != null) {
-                if (!int.TryParse(name.Substring(prefix.Length), out var n))
+                if (!int.TryParse(name.AsSpan(prefix.Length), out var n))
                     n = 1;
 
                 do {
@@ -96,7 +96,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
         }
         public  new         void                Add(PdfResourceEntry entry)
         {
-            if (entry is null) throw new ArgumentNullException(nameof(entry));
+            ArgumentNullException.ThrowIfNull(entry);
 
             if (FindByName(entry.Name) != null)
                 throw new PdfExceptionWriter("Resource name already in use.");

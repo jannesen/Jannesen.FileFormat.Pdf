@@ -86,3 +86,6 @@ dotnet_diagnostic.CA2225.severity = none
 # CA2251: Use 'string.Equals'
 dotnet_diagnostic.CA2251.severity = none
 
+
+# CA1031: Do not catch general exception types
+dotnet_diagnostic.CA1031.severity = none

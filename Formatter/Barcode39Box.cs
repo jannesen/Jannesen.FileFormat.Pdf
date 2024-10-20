@@ -33,7 +33,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
                 return _text;
             }
             set {
-                if (value is null) throw new ArgumentNullException(nameof(value));
+                ArgumentNullException.ThrowIfNull(value);
 
                 _validateText(value);
                 _text = value;
@@ -42,7 +42,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public                                          Barcode39Box(PdfDistance width, PdfDistance height, string text)
         {
-            if (text is null) throw new ArgumentNullException(nameof(text));
+            ArgumentNullException.ThrowIfNull(text);
 
             _validateText(text);
             _width  = width;

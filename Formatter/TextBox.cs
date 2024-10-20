@@ -96,8 +96,8 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public                                  TextBox(PdfStyleText style, PdfTextAlign align, PdfDistance width, int maxLines, string text)
         {
-            if (style is null) throw new ArgumentNullException(nameof(style));
-            if (text is null) throw new ArgumentNullException(nameof(text));
+            ArgumentNullException.ThrowIfNull(style);
+            ArgumentNullException.ThrowIfNull(text);
 
             _setWidth = width;
             _style    = style;
@@ -107,8 +107,8 @@ namespace Jannesen.FileFormat.Pdf.Formatter
         }
         public                                  TextBox(PdfStyleText style, PdfTextAlign align, int maxLines, string text)
         {
-            if (style is null) throw new ArgumentNullException(nameof(style));
-            if (text is null) throw new ArgumentNullException(nameof(text));
+            ArgumentNullException.ThrowIfNull(style);
+            ArgumentNullException.ThrowIfNull(text);
 
             _setWidth = PdfDistance.NaN;
             _style    = style;

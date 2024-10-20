@@ -102,7 +102,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfStyleLine(PdfStyleLine style)
         {
-            if (style is null) throw new ArgumentNullException(nameof(style));
+            ArgumentNullException.ThrowIfNull(style);
 
             _locked     = false;
             _lineColor  = style._lineColor;
@@ -115,7 +115,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfStyleLine(PdfColor lineColor, PdfDistance lineWidth)
         {
-            if (lineColor is null) throw new ArgumentNullException(nameof(lineColor));
+            ArgumentNullException.ThrowIfNull(lineColor);
 
             _locked     = true;
             _lineColor  = lineColor;
@@ -128,7 +128,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfStyleLine(PdfColor lineColor, PdfDistance lineWith, PdfLineCapStyle CapStyle, PdfLineJoinStyle joinStyle, double miterLimit, PdfDistance[] dashArray, PdfDistance dashPhase)
         {
-            if (lineColor is null) throw new ArgumentNullException(nameof(lineColor));
+            ArgumentNullException.ThrowIfNull(lineColor);
 
             _locked     = true;
             _lineColor  = lineColor;

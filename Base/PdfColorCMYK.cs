@@ -71,7 +71,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfColorCMYK(PdfColorCMYK color)
         {
-            if (color is null) throw new ArgumentNullException(nameof(color));
+            ArgumentNullException.ThrowIfNull(color);
 
             _locked  = false;
             _cyan    = color._cyan;

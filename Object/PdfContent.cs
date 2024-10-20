@@ -112,7 +112,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                                      PdfContent(PdfDictionary dictonary)
         {
-            if (dictonary is null) throw new ArgumentNullException(nameof(dictonary));
+            ArgumentNullException.ThrowIfNull(dictonary);
 
             if (dictonary.NamedType != PdfObject.ntPage)
                 throw new PdfException("Object is not a page or content.");
@@ -223,7 +223,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  void                                Text(PdfStyleText textStyle, PdfPoint point, PdfTextAlign align, string txt)
         {
-            if (textStyle is null) throw new ArgumentNullException(nameof(textStyle));
+            ArgumentNullException.ThrowIfNull(textStyle);
 
             if (!string.IsNullOrEmpty(txt)) {
                 SetTextStyle(textStyle);
@@ -243,7 +243,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  void                                Text(PdfStyleText textStyle, PdfPoint point, PdfTextAlign align, double rotation, string txt)
         {
-            if (textStyle is null) throw new ArgumentNullException(nameof(textStyle));
+            ArgumentNullException.ThrowIfNull(textStyle);
 
             if (!string.IsNullOrEmpty(txt)) {
                 SetTextStyle(textStyle);
@@ -269,7 +269,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  void                                Image(PdfPoint point, PdfSize size, PdfImage image)
         {
-            if (image is null) throw new ArgumentNullException(nameof(image));
+            ArgumentNullException.ThrowIfNull(image);
 
             if (_textMode)
                 opEndText();
@@ -283,7 +283,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  void                                SetLineStyle(PdfStyleLine style)
         {
-            if (style is null) throw new ArgumentNullException(nameof(style));
+            ArgumentNullException.ThrowIfNull(style);
 
             if (style.LineColor != _curStrokeColor) {
                 if (style.LineColor.ColorSpace != _curStrokeColorSpace)
@@ -309,7 +309,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  void                                SetFillStyle(PdfStyleFill style)
         {
-            if (style is null) throw new ArgumentNullException(nameof(style));
+            ArgumentNullException.ThrowIfNull(style);
 
             if (style.FillColor != _curNonStrokeColor) {
                 if (style.FillColor.ColorSpace != _curNonStrokeColorSpace)
@@ -320,7 +320,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  void                                SetTextStyle(PdfStyleText style)
         {
-            if (style is null) throw new ArgumentNullException(nameof(style));
+            ArgumentNullException.ThrowIfNull(style);
 
             if (style.TextColor != _curNonStrokeColor) {
                 if (style.TextColor.ColorSpace != _curNonStrokeColorSpace)
@@ -367,7 +367,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  void                                opSetStrokeColorSpace(string name)
         {
-            if (name is null) throw new ArgumentNullException(nameof(name));
+            ArgumentNullException.ThrowIfNull(name);
 
             WriteByte((byte)'/');
             WriteStr(name);
@@ -377,7 +377,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  void                                opSetNonStrokeColorSpace(string name)
         {
-            if (name is null) throw new ArgumentNullException(nameof(name));
+            ArgumentNullException.ThrowIfNull(name);
 
             WriteByte((byte)'/');
             WriteStr(name);
@@ -434,7 +434,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  void                                opSelectFont(PdfFont font, PdfDistance size)
         {
-            if (font is null) throw new ArgumentNullException(nameof(font));
+            ArgumentNullException.ThrowIfNull(font);
 
             WriteResourceName(font);
             WriteNumber(size.pnts, 2, true);
@@ -444,7 +444,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  void                                opShowText(string text, int start, int length)
         {
-            if (text is null) throw new ArgumentNullException(nameof(text));
+            ArgumentNullException.ThrowIfNull(text);
 
             WriteString(text, start, length);
             WriteStr(bs_Tj);
@@ -560,7 +560,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  void                                WriteResourceName(PdfObject resource)
         {
-            if (resource is null) throw new ArgumentNullException(nameof(resource));
+            ArgumentNullException.ThrowIfNull(resource);
 
             WriteByte((byte)'/');
             WriteStr(_resources.GetName(resource));
@@ -665,7 +665,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  void                                WriteString(string value, int start, int length)
         {
-            if (value is null) throw new ArgumentNullException(nameof(value));
+            ArgumentNullException.ThrowIfNull(value);
 
             if (_locked)
                 throw new PdfExceptionWriter("Not allowed to change the content after it is added to a document.");
@@ -686,13 +686,13 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  void                                WriteStr(string data)
         {
-            if (data is null) throw new ArgumentNullException(nameof(data));
+            ArgumentNullException.ThrowIfNull(data);
 
             WriteStr(Encoding.ASCII.GetBytes(data));
         }
         public                  void                                WriteStr(byte[] byteStr)
         {
-            if (byteStr is null) throw new ArgumentNullException(nameof(byteStr));
+            ArgumentNullException.ThrowIfNull(byteStr);
 
             if (_locked)
                 throw new PdfExceptionWriter("Not allowed to change the content after it is added to a document.");
@@ -709,7 +709,7 @@ namespace Jannesen.FileFormat.Pdf
 
         public                  string                              GetResourceName(PdfObject resource)
         {
-            if (resource is null) throw new ArgumentNullException(nameof(resource));
+            ArgumentNullException.ThrowIfNull(resource);
 
             return _resources.GetName(resource);
         }

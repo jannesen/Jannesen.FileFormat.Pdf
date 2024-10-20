@@ -31,8 +31,8 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public                                      TableCell(TableRow row, TableColumn column, int colSpan)
         {
-            if (row is null) throw new ArgumentNullException(nameof(row));
-            if (column is null) throw new ArgumentNullException(nameof(column));
+            ArgumentNullException.ThrowIfNull(row);
+            ArgumentNullException.ThrowIfNull(column);
 
             _column     = column;
             _row        = row;
@@ -85,7 +85,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public                  TextBox             AddText(string text)
         {
-            if (text is null) throw new ArgumentNullException(nameof(text));
+            ArgumentNullException.ThrowIfNull(text);
 
             PdfStyleText    style;
             PdfTextAlign    align;
@@ -155,7 +155,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
 
         public                                      TableCells(TableRow row, int[] colSpans)
         {
-            if (row is null) throw new ArgumentNullException(nameof(row));
+            ArgumentNullException.ThrowIfNull(row);
 
             if (colSpans != null && colSpans.Length != row.Table.Columns.Count)
                 throw new ArgumentException("Invalid ColSpan array.");

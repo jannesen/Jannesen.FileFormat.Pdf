@@ -32,7 +32,7 @@ namespace Jannesen.FileFormat.Pdf
 
         public                                  PdfImage(Stream imageStream)
         {
-            if (imageStream is null) throw new ArgumentNullException(nameof(imageStream));
+            ArgumentNullException.ThrowIfNull(imageStream);
 
             byte[]      Header = new byte[16];
 
@@ -54,7 +54,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public  static          PdfImage        LoadFromFile(string fileName)
         {
-            if (fileName is null) throw new ArgumentNullException(nameof(fileName));
+            ArgumentNullException.ThrowIfNull(fileName);
 
             try {
                 using (FileStream imageStream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read)) {
@@ -67,8 +67,8 @@ namespace Jannesen.FileFormat.Pdf
         }
         public  static          PdfImage        LoadFromAssambly(Assembly assembly, string name)
         {
-            if (assembly is null) throw new ArgumentNullException(nameof(assembly));
-            if (name is null) throw new ArgumentNullException(nameof(name));
+            ArgumentNullException.ThrowIfNull(assembly);
+            ArgumentNullException.ThrowIfNull(name);
 
             Stream imageStream = null;
 

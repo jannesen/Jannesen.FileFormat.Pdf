@@ -98,7 +98,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfDocumentReader(Stream stream, bool leaveOpen)
         {
-            if (stream is null) throw new ArgumentNullException(nameof(stream));
+            ArgumentNullException.ThrowIfNull(stream);
 
             try {
                 if (!stream.CanSeek) {

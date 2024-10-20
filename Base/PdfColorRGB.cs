@@ -62,7 +62,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                                          PdfColorRGB(PdfColorRGB color)
         {
-            if (color is null) throw new ArgumentNullException(nameof(color));
+            ArgumentNullException.ThrowIfNull(color);
 
             _locked = false;
             _red    = color._red;
