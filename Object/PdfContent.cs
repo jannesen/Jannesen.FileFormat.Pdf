@@ -5,6 +5,8 @@ using System.IO.Compression;
 using System.Text;
 using Jannesen.FileFormat.Pdf.Internal;
 
+#pragma warning disable CA2213 // Disposable fields should be disposed
+
 namespace Jannesen.FileFormat.Pdf
 {
     public sealed class PdfContent: PdfObject, IDisposable

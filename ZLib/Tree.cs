@@ -34,6 +34,8 @@
  * and contributors of zlib.
  */
 
+#pragma warning disable CA1823 // Unused field
+
 namespace Jannesen.FileFormat.Pdf.ZLib
 {
 

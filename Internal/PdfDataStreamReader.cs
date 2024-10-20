@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
+
+#pragma warning disable CA2213 // Disposable fields should be disposed
 
 namespace Jannesen.FileFormat.Pdf.Internal
 {

@@ -1,5 +1,7 @@
 ﻿using System;
 
+#pragma warning disable CA1805 // Do not initialize unnecessarily
+
 namespace Jannesen.FileFormat.Pdf
 {
     public class PdfStyleFill

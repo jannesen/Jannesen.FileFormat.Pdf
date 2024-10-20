@@ -34,15 +34,15 @@ namespace Jannesen.FileFormat.Pdf
         {
             PdfFontFamily   FontFamily;
 
-            if (string.Compare(familyName, "courier", StringComparison.OrdinalIgnoreCase) == 0)       FontFamily = FontFamilyCourier;
+            if (string.Equals(familyName, "courier", StringComparison.OrdinalIgnoreCase))       FontFamily = FontFamilyCourier;
             else
-            if (string.Compare(familyName, "helvetica", StringComparison.OrdinalIgnoreCase) == 0)     FontFamily = FontFamilyHelvetica;
+            if (string.Equals(familyName, "helvetica", StringComparison.OrdinalIgnoreCase))     FontFamily = FontFamilyHelvetica;
             else
-            if (string.Compare(familyName, "times-roman", StringComparison.OrdinalIgnoreCase) == 0)   FontFamily = FontFamilyTimesRoman;
+            if (string.Equals(familyName, "times-roman", StringComparison.OrdinalIgnoreCase))   FontFamily = FontFamilyTimesRoman;
             else
-            if (string.Compare(familyName, "symbol", StringComparison.OrdinalIgnoreCase) == 0)        FontFamily = FontFamilySymbol;
+            if (string.Equals(familyName, "symbol", StringComparison.OrdinalIgnoreCase))        FontFamily = FontFamilySymbol;
             else
-            if (string.Compare(familyName, "zapf-dngbats", StringComparison.OrdinalIgnoreCase) == 0)  FontFamily = FontFamilyZapfDingbats;
+            if (string.Equals(familyName, "zapf-dngbats", StringComparison.OrdinalIgnoreCase))  FontFamily = FontFamilyZapfDingbats;
             else
                 throw new PdfException("Unknown font-family '"+familyName+"'.");
 

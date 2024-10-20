@@ -49,6 +49,8 @@ using System.IO;
  * http://www.lowagie.com/iText/
  */
 
+#pragma warning disable CA1708 // Identifiers should differ by more than case
+
 namespace Jannesen.FileFormat.Pdf.ZLib
 {
     /// <summary>

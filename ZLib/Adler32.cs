@@ -34,6 +34,8 @@
  * and contributors of zlib.
  */
 
+#pragma warning disable CA1822 // Member does not access instance data and can be marked as static
+
 namespace Jannesen.FileFormat.Pdf.ZLib
 {
     internal sealed class Adler32
@@ -41,7 +43,7 @@ namespace Jannesen.FileFormat.Pdf.ZLib
         private const   int     BASE = 65521;       // largest prime smaller than 65536
         private const   int     NMAX = 5552;        // NMAX is the largest n such that 255n(n+1)/2 + (n+1)(BASE-1) <= 2^32-1
 
-        internal        long    adler32(long adler, byte[] buf, int index, int len)
+        internal long    adler32(long adler, byte[] buf, int index, int len)
         {
             if (buf == null)
                 return 1L;

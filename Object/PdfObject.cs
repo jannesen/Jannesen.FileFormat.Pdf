@@ -12,7 +12,7 @@ namespace Jannesen.FileFormat.Pdf
         public override         PdfValueType                Type                    { get => PdfValueType.Object; }
         public virtual          string                      NamedType               { get => null;                }
 
-        public                                              PdfObject()
+        protected                                           PdfObject()
         {
         }
     }

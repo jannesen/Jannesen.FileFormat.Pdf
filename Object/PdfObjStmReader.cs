@@ -4,6 +4,8 @@ using System.IO;
 using System.Text;
 using Jannesen.FileFormat.Pdf.Internal;
 
+#pragma warning disable CA2000 // Dispose objects before losing scope
+
 namespace Jannesen.FileFormat.Pdf
 {
     public sealed class PdfObjStmReader: PdfObject

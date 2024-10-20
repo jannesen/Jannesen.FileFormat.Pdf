@@ -76,7 +76,7 @@ namespace Jannesen.FileFormat.Pdf
                 imageStream = assembly.GetManifestResourceStream(name);
 
                 if (imageStream == null)
-                    throw new Exception("Can't get resource.");
+                    throw new InvalidOperationException("Can't get resource '" + name + "'.");
 
                 return new PdfImage(imageStream);
             }

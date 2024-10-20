@@ -54,7 +54,7 @@ namespace Jannesen.FileFormat.Pdf.Formatter
         public      abstract    PdfDistance         Width   { get; set; }
         public      abstract    PdfDistance         Height  { get; }
 
-        public                                      Box()
+        protected                                   Box()
         {
             _parent = null;
             _top    = PdfDistance.Zero;

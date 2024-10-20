@@ -34,6 +34,9 @@
  * and contributors of zlib.
  */
 
+#pragma warning disable CA1823 // Unused field
+#pragma warning disable CA1822 // Member does not access instance data and can be marked as static
+
 namespace Jannesen.FileFormat.Pdf.ZLib
 {
 

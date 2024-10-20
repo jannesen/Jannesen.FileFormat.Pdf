@@ -34,6 +34,10 @@
  * and contributors of zlib.
  */
 
+#pragma warning disable IDE0060 // Remove unused parameter
+#pragma warning disable CA1805 // Do not initialize unnecessarily
+#pragma warning disable CA1823 // Unused field
+
 namespace Jannesen.FileFormat.Pdf.ZLib
 {
 

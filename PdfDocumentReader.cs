@@ -221,7 +221,7 @@ namespace Jannesen.FileFormat.Pdf
 
             _pages = pages.ToArray();
         }
-        private             void                        _constructPages(PdfDictionary pageNode, List<PdfDictionary> pages)
+        private static      void                        _constructPages(PdfDictionary pageNode, List<PdfDictionary> pages)
         {
             switch(pageNode.NamedType) {
             case "Page":
