@@ -34,6 +34,8 @@
  * and contributors of zlib.
  */
 
+#pragma warning disable IDE0300 // Use collection expression for array
+
 namespace Jannesen.FileFormat.Pdf.ZLib
 {
 

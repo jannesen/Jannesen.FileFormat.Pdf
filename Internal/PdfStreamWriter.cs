@@ -8,7 +8,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
 {
     public class PdfStreamWriter
     {
-        private readonly static         byte[]              bsFileHeader        = new byte[] { (byte)'%', (byte)'P', (byte)'D', (byte)'F', (byte)'-', (byte)'1', (byte)'.', (byte)'6', (byte)'\n', (byte)'%', 0xE2, 0xE3, 0xCF, 0xD3, (byte)'\n' };
+        private readonly static         byte[]              bsFileHeader        = [ (byte)'%', (byte)'P', (byte)'D', (byte)'F', (byte)'-', (byte)'1', (byte)'.', (byte)'6', (byte)'\n', (byte)'%', 0xE2, 0xE3, 0xCF, 0xD3, (byte)'\n' ];
         private readonly static         byte[]              bsFileEOF           = Encoding.ASCII.GetBytes("%%EOF\n");
         private readonly static         byte[]              bsNull              = Encoding.ASCII.GetBytes("null");
         private readonly static         byte[]              bsFalse             = Encoding.ASCII.GetBytes("false");
@@ -23,7 +23,7 @@ namespace Jannesen.FileFormat.Pdf.Internal
         private readonly static         byte[]              bsStreamBegin       = Encoding.ASCII.GetBytes("stream\n");
         private readonly static         byte[]              bsStreamEnd         = Encoding.ASCII.GetBytes("\nendstream");
         private readonly static         byte[]              bsRelative          = Encoding.ASCII.GetBytes(" R");
-        private readonly static         byte[]              bsUnicodePrefix     = new byte[] { 254, 254, 255 };
+        private readonly static         byte[]              bsUnicodePrefix     = [ 254, 254, 255 ];
 
         private readonly                Stream              _pdfStream;         // The PDF data stream
         private                         int                 _pdfPosition;       // Position in PDF stream.

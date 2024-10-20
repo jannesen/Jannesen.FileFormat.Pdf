@@ -49,7 +49,7 @@ namespace Jannesen.FileFormat.Pdf
             }
         }
 
-        public              PdfFont[]           Fonts       { get => new PdfFont[] {_normal, _bold, _italic, _boldItalic}; }
+        public              PdfFont[]           Fonts       { get => [ _normal, _bold, _italic, _boldItalic ]; }
 
         internal                                PdfStandardFontFamily(System.IO.BinaryReader reader)
         {
