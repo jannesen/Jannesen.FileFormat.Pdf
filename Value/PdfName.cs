@@ -32,8 +32,8 @@ namespace Jannesen.FileFormat.Pdf
         }
         public  override        bool                    Equals(object obj)
         {
-            if (obj is PdfName) {
-                return ((PdfName)obj).Value == Value;
+            if (obj is PdfName pdfName) {
+                return pdfName.Value == Value;
             }
 
             return false;

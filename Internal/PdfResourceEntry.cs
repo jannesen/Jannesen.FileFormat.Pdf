@@ -124,8 +124,8 @@ namespace Jannesen.FileFormat.Pdf.Internal
                         if (Entry.Class == CurrentClass) {
                             writer.WriteName(Entry.Name);
 
-                            if (Entry.Resource is PdfObject)
-                                writer.WriteReference(document, (PdfObject)Entry.Resource);
+                            if (Entry.Resource is PdfObject pdfObject)
+                                writer.WriteReference(document, pdfObject);
                             else
                                 Entry.Resource.pdfWriteToDocument(document, writer);
 

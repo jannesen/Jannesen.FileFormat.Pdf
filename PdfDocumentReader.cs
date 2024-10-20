@@ -196,8 +196,8 @@ namespace Jannesen.FileFormat.Pdf
 
                     var obj = _readObj(reader, false);
 
-                    if (obj is PdfObjectReader && ((PdfObjectReader)obj).NamedType == "ObjStm")
-                        obj = new PdfObjStmReader(this, (PdfObjectReader)obj);
+                    if (obj is PdfObjectReader pdfObjectReader && pdfObjectReader.NamedType == "ObjStm")
+                        obj = new PdfObjStmReader(this, pdfObjectReader);
 
                     return obj;
                 }
@@ -409,8 +409,8 @@ namespace Jannesen.FileFormat.Pdf
 
             for (int i = 0 ; i < dictionary.Count ; ++i) {
                 var entry = dictionary[i];
-                if (entry is PdfName) {
-                    switch(((PdfName)entry).Value) {
+                if (entry is PdfName pdfName) {
+                    switch(pdfName.Value) {
                     case "W":       w                 = ((PdfArray)dictionary[++i]).Children;               break;
                     case "Index":   index             = ((PdfArray)dictionary[++i]).Children;               break;
                     case "Size":    size              = ((PdfInteger)dictionary[++i]).Value;                break;
@@ -454,12 +454,12 @@ namespace Jannesen.FileFormat.Pdf
         {
             var value = reader.ReadValue();
             var token = (!compressed && reader.Position < reader.Stream.Length) ? reader.ReadToken() : null;
-            if (token != null && value is PdfDictionary && token.Type == PdfValueType.StreamBegin) {
+            if (token != null && value is PdfDictionary pdfDictionary && token.Type == PdfValueType.StreamBegin) {
                 var streamBegin  = reader.Position;
-                var streamLength = ((PdfDictionary)value).ValueByName<PdfInteger>("Length").Value;
+                var streamLength = pdfDictionary.ValueByName<PdfInteger>("Length").Value;
                 reader.Skip(streamLength);
                 reader.ReadToken(PdfValueType.StreamEnd);
-                value = new PdfObjectReader((PdfDictionary)value, new PdfDataStreamReader(_stream, streamBegin, streamLength));
+                value = new PdfObjectReader(pdfDictionary, new PdfDataStreamReader(_stream, streamBegin, streamLength));
                 token = (!compressed && reader.Position < reader.Stream.Length) ? reader.ReadToken() : null;
             }
 

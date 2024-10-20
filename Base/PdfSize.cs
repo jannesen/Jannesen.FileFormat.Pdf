@@ -29,10 +29,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public  override readonly   bool            Equals(object obj)
         {
-            if (obj is PdfSize)
-                return this == (PdfSize)obj;
-
-            return false;
+            return obj is PdfSize objPdfSize && objPdfSize == this;
         }
         public           readonly   bool            Equals(PdfSize o)
         {

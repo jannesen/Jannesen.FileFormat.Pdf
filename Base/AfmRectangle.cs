@@ -37,12 +37,9 @@ namespace Jannesen.FileFormat.Pdf
         {
             return !(p1 == p2);
         }
-        public  override    bool    Equals(object obj)
+        public  override    bool    Equals(object other)
         {
-            if (obj is AfmRectangle)
-                return this == (AfmRectangle)obj;
-
-            return false;
+            return other is AfmRectangle otherAfmRectangle && otherAfmRectangle == this;
         }
         public              bool    Equals(AfmRectangle o)
         {

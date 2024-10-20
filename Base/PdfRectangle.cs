@@ -41,12 +41,7 @@ namespace Jannesen.FileFormat.Pdf
 
         public  override readonly   bool            Equals(object other)
         {
-            if (other is PdfRectangle) {
-                if (this == ((PdfRectangle)other))
-                    return true;
-            }
-
-            return false;
+            return other is PdfRectangle otherPdfRectangle && otherPdfRectangle == this;
         }
         public           readonly   bool            Equals(PdfRectangle other)
         {

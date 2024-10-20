@@ -90,15 +90,11 @@ namespace Jannesen.FileFormat.Pdf
 
         public  override            bool                Equals(object other)
         {
-            if (other is PdfColorCMYK) {
-                if (((PdfColorCMYK)other)._cyan    == Cyan
-                 && ((PdfColorCMYK)other)._magenta == Magenta
-                 && ((PdfColorCMYK)other)._yellow  == Yellow
-                 && ((PdfColorCMYK)other)._black   == Black)
-                    return true;
-            }
-
-            return false;
+            return other is PdfColorCMYK otherPdfColorCMYK &&
+                   otherPdfColorCMYK._cyan    == Cyan    &&
+                   otherPdfColorCMYK._magenta == Magenta &&
+                   otherPdfColorCMYK._yellow  == Yellow  &&
+                   otherPdfColorCMYK._black   == Black;
         }
         public  override            int                 GetHashCode()
         {

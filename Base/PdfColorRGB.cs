@@ -79,14 +79,10 @@ namespace Jannesen.FileFormat.Pdf
 
         public  override            bool                Equals(object other)
         {
-            if (other is PdfColorRGB) {
-                if (((PdfColorRGB)other)._red   == Red
-                 && ((PdfColorRGB)other)._green == Green
-                 && ((PdfColorRGB)other)._blue  == Blue)
-                    return true;
-            }
-
-            return false;
+            return other is PdfColorRGB otherPdfColorRGB &&
+                   otherPdfColorRGB._red   == Red   &&
+                   otherPdfColorRGB._green == Green &&
+                   otherPdfColorRGB._blue  == Blue;
         }
         public  override            int                 GetHashCode()
         {

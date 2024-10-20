@@ -131,8 +131,8 @@ namespace Jannesen.FileFormat.Pdf
                 _xrefTable.Add(reference);
                 _referenceTable.Add(obj, reference);
 
-                if (obj is PdfPage)
-                    _pages.Add((PdfPage)obj);
+                if (obj is PdfPage pdfPage)
+                    _pages.Add(pdfPage);
 
                 if (obj.hasStream) {
                     reference.Position = _writer.PdfPosition;
@@ -302,7 +302,7 @@ namespace Jannesen.FileFormat.Pdf
 
                 pageLink.Parent = currentIntermediateNode;
                 currentIntermediateNode.Pages.Add(pageLink);
-                currentIntermediateNode.Count += (pageLink is PdfPages) ? ((PdfPages)pageLink).Count : 1;
+                currentIntermediateNode.Count += (pageLink is PdfPages pdfPages) ? pdfPages.Count : 1;
 
                 if (currentIntermediateNode.Pages.Count >= numberOfLeafsInCurrentIntermediateNode)
                     currentIntermediateNode = null;

@@ -48,8 +48,8 @@ namespace Jannesen.FileFormat.Pdf
                 return null;
             }
 
-            if (value is PdfReferenceReader && resolve)
-                value = ((PdfReferenceReader)value).Value;
+            if (value is PdfReferenceReader pdfReferenceReader && resolve)
+                value = pdfReferenceReader.Value;
 
             if (value is not T)
                 throw new PdfExceptionReader("Invalid value '" + name + "' expect " + typeof(T).Name + " got " + value.GetType().Name + ".");

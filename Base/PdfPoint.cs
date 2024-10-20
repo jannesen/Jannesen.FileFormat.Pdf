@@ -79,13 +79,7 @@ namespace Jannesen.FileFormat.Pdf
 
         public  override readonly   bool            Equals(object other)
         {
-            if (other is PdfPoint) {
-                if (x == ((PdfPoint)other).x
-                 && y == ((PdfPoint)other).y)
-                    return true;
-            }
-
-            return false;
+            return other is PdfPoint otherPdfPoint && otherPdfPoint == this;
         }
         public           readonly   bool            Equals(PdfPoint other)
         {

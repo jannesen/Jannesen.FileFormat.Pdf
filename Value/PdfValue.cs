@@ -50,8 +50,8 @@ namespace Jannesen.FileFormat.Pdf
         {
             var value = this;
 
-            if (value is PdfReferenceReader)
-                value = ((PdfReferenceReader)value).Value;
+            if (value is PdfReferenceReader pdfReferenceReader)
+                value = pdfReferenceReader.Value;
 
             if (value is not T)
                 throw new PdfExceptionReader("Invalid type " + value.GetType().Name + " expect " + typeof(T).Name + ".");
