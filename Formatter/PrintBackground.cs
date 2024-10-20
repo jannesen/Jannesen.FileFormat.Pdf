@@ -92,14 +92,9 @@ namespace Jannesen.FileFormat.Pdf.Formatter
         {
             ArgumentNullException.ThrowIfNull(content);
 
-            if (_horizontalLines != null)
-                _horizontalLines.Print(content);
-
-            if (_verticalLines   != null)
-                _verticalLines.Print(content);
-
-            if (_diagonalLines   != null)
-                _diagonalLines.Print(content);
+            _horizontalLines?.Print(content);
+            _verticalLines?.Print(content);
+            _diagonalLines?.Print(content);
         }
     }
 }

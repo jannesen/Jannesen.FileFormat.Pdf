@@ -84,8 +84,7 @@ namespace Jannesen.FileFormat.Pdf
                 throw new PdfExceptionWriter("Error reading '"+name+"' from assembly '" + assembly.FullName + "': "+Err.Message);
             }
             finally {
-                if (imageStream != null)
-                    imageStream.Close();
+                imageStream?.Close();
             }
         }
 
