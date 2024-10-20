@@ -1,4 +1,4 @@
-﻿# Jannesen.FileFormat.Pdf
+# Jannesen.FileFormat.Pdf
 
 Basic PDF reader/writer.
 
