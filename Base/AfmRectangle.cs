@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Jannesen.FileFormat.Pdf
 {
-    public struct AfmRectangle: IEquatable<AfmRectangle>
+    public readonly struct AfmRectangle: IEquatable<AfmRectangle>
     {
         public  readonly    int     llX;
         public  readonly    int     llY;
