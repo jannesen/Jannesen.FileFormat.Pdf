@@ -8,23 +8,23 @@ namespace Jannesen.FileFormat.Pdf
 {
     public abstract class PdfFont : PdfObject
     {
-        private                 string              _fontName;
-        private                 string              _fullName;
-        private                 string              _familyName;
-        private                 string              _weight;
-        private                 bool                _isCIDFont;
-        private                 double              _italicAngle;
-        private                 bool                _isFixedPitch;
-        private                 string              _characterSet;
-        private                 AfmRectangle        _fontBBox;
-        private                 int                 _underlinePosition;
-        private                 int                 _underlineThickness;
-        private                 int                 _capHeight;
-        private                 int                 _xheight;
-        private                 int                 _ascender;
-        private                 int                 _descender;
-        private                 int                 _stdHW;
-        private                 int                 _stdVW;
+        private readonly        string              _fontName;
+        private readonly        string              _fullName;
+        private readonly        string              _familyName;
+        private readonly        string              _weight;
+        private readonly        bool                _isCIDFont;
+        private readonly        double              _italicAngle;
+        private readonly        bool                _isFixedPitch;
+        private readonly        string              _characterSet;
+        private readonly        AfmRectangle        _fontBBox;
+        private readonly        int                 _underlinePosition;
+        private readonly        int                 _underlineThickness;
+        private readonly        int                 _capHeight;
+        private readonly        int                 _xheight;
+        private readonly        int                 _ascender;
+        private readonly        int                 _descender;
+        private readonly        int                 _stdHW;
+        private readonly        int                 _stdVW;
         private readonly        AfmCharMetric[]     _charMetric;
 
         public  override        string              NamedType               { get { return "Font";                                                                              } }

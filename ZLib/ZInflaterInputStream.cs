@@ -49,6 +49,7 @@ using System.IO;
  * http://www.lowagie.com/iText/
  */
 
+#pragma warning disable IDE0044 // Add readonly modifier
 #pragma warning disable CA1708 // Identifiers should differ by more than case
 #pragma warning disable CA1805 // Do not initialize unnecessarily
 
