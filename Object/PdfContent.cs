@@ -879,13 +879,13 @@ namespace Jannesen.FileFormat.Pdf
                 PdfContent  Parent        = null;
 
                 for (int i = 0 ; i < contentsArray.Count - 1 ; ++i) {
-                    if (!(contentsArray[i] is PdfReferenceReader))
+                    if (contentsArray[i] is not PdfReferenceReader)
                         throw new PdfException("Invalid content referecen.");
 
                     Parent = new PdfContent(Parent, ((PdfReferenceReader)contentsArray[i]).Object);
                 }
 
-                if (!(contentsArray[contentsArray.Count - 1] is PdfReferenceReader))
+                if (contentsArray[contentsArray.Count - 1] is not PdfReferenceReader)
                     throw new PdfException("Invalid content referecen.");
 
                 _parent = Parent;

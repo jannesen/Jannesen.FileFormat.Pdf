@@ -202,7 +202,7 @@ namespace Jannesen.FileFormat.Pdf
                     return obj;
                 }
                 else {
-                    if (!(_xrefTable[reference.CompressedObj.Id].Value is PdfObjStmReader objStm))
+                    if (_xrefTable[reference.CompressedObj.Id].Value is not PdfObjStmReader objStm)
                         throw new PdfException("Obj not ObjStm.");
 
                     return _readObj(new PdfStreamReader(this,  objStm.GetStream(reference.Position, reference.Id), 0), true);
@@ -396,7 +396,7 @@ namespace Jannesen.FileFormat.Pdf
             reader.ReadToken(PdfValueType.ObjectBegin);
             _allocateXrefTable(id + 1);
             var rr  = new PdfReferenceReader(this, id, revision, pos);
-            if (!(_readObj(reader, false) is PdfObjectReader obj))
+            if (_readObj(reader, false) is not PdfObjectReader obj)
                 throw new PdfExceptionReader("Invalid Xref obj.");
             rr.setValue(obj);
             _xrefTable[id] = rr;

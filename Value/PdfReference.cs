@@ -44,7 +44,7 @@ namespace Jannesen.FileFormat.Pdf
         public                  PdfObjectReader         Object
         {
             get {
-                if (!(Value is PdfObjectReader obj))
+                if (Value is not PdfObjectReader obj)
                     throw new InvalidOperationException("Object expected.");
 
                 return obj;

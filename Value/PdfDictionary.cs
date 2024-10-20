@@ -51,7 +51,7 @@ namespace Jannesen.FileFormat.Pdf
             if (value is PdfReferenceReader && resolve)
                 value = ((PdfReferenceReader)value).Value;
 
-            if (!(value is T))
+            if (value is not T)
                 throw new PdfExceptionReader("Invalid value '" + name + "' expect " + typeof(T).Name + " got " + value.GetType().Name + ".");
 
             return (T)value;
