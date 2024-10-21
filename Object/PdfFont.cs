@@ -4,28 +4,30 @@ using System.Globalization;
 using System.Text;
 using Jannesen.FileFormat.Pdf.Internal;
 
+#pragma warning disable IDE0044 // Add readonly modifier
+
 namespace Jannesen.FileFormat.Pdf
 {
     public abstract class PdfFont : PdfObject
     {
-        private readonly        string              _fontName;
-        private readonly        string              _fullName;
-        private readonly        string              _familyName;
-        private readonly        string              _weight;
-        private readonly        bool                _isCIDFont;
-        private readonly        double              _italicAngle;
-        private readonly        bool                _isFixedPitch;
-        private readonly        string              _characterSet;
-        private readonly        AfmRectangle        _fontBBox;
-        private readonly        int                 _underlinePosition;
-        private readonly        int                 _underlineThickness;
-        private readonly        int                 _capHeight;
-        private readonly        int                 _xheight;
-        private readonly        int                 _ascender;
-        private readonly        int                 _descender;
-        private readonly        int                 _stdHW;
-        private readonly        int                 _stdVW;
-        private readonly        AfmCharMetric[]     _charMetric;
+        private                 string              _fontName;
+        private                 string              _fullName;
+        private                 string              _familyName;
+        private                 string              _weight;
+        private                 bool                _isCIDFont;
+        private                 double              _italicAngle;
+        private                 bool                _isFixedPitch;
+        private                 string              _characterSet;
+        private                 AfmRectangle        _fontBBox;
+        private                 int                 _underlinePosition;
+        private                 int                 _underlineThickness;
+        private                 int                 _capHeight;
+        private                 int                 _xheight;
+        private                 int                 _ascender;
+        private                 int                 _descender;
+        private                 int                 _stdHW;
+        private                 int                 _stdVW;
+        private                 AfmCharMetric[]     _charMetric;
 
         public  override        string              NamedType               { get { return "Font";                                                                              } }
         public                  string              FontName                { get { return _fontName;                                                                           } }
@@ -207,7 +209,7 @@ namespace Jannesen.FileFormat.Pdf
             }
         }
 
-        internal                                    PdfFont(System.IO.BinaryReader reader)
+        internal                                    PdfFont(BinaryReader reader)
         {
             _fontName           = reader.ReadString();
             _fullName           = reader.ReadString();
@@ -332,7 +334,7 @@ namespace Jannesen.FileFormat.Pdf
         }
         public                  void                WriteTo(System.IO.BinaryWriter writer)
         {
-            if (writer is null) throw new ArgumentNullException(nameof(writer));
+            ArgumentNullException.ThrowIfNull(writer);
 
             writer.Write(_fontName);
             writer.Write(_fullName);
