@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
+#pragma warning disable CA2263 // Prefer generic overload when type is known
+
 namespace Jannesen.FileFormat.Pdf
 {
     internal static class PdfParse
