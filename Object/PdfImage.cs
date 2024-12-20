@@ -34,18 +34,17 @@ namespace Jannesen.FileFormat.Pdf
         {
             if (imageStream is null) throw new ArgumentNullException(nameof(imageStream));
 
-            byte[]      Header = new byte[16];
+            var header = new byte[16];
 
-            imageStream.Read(Header, 0, 16);
-
-            if (Header[0] == 0xFF
-             && Header[1] == 0xD8
-             && Header[2] == 0xFF
-             && Header[3] == 0xE0
-             && Header[6] == (byte)'J'
-             && Header[7] == (byte)'F'
-             && Header[8] == (byte)'I'
-             && Header[9] == (byte)'F')
+            if (imageStream.Read(header, 0, 16) == 16 &&
+                header[0] == 0xFF
+             && header[1] == 0xD8
+             && header[2] == 0xFF
+             && header[3] == 0xE0
+             && header[6] == (byte)'J'
+             && header[7] == (byte)'F'
+             && header[8] == (byte)'I'
+             && header[9] == (byte)'F')
             {
                 _LoadJPG(imageStream);
             }
