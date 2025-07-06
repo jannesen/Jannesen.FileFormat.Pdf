@@ -1,4 +1,4 @@
-StartFontMetrics 4.1
+﻿StartFontMetrics 4.1
 Comment Copyright (c) 1989, 1990, 1991, 1992, 1993, 1997 Adobe Systems Incorporated.  All Rights Reserved.
 Comment Creation Date: Thu May  1 17:27:09 1997
 Comment UniqueID 43050
@@ -10,7 +10,7 @@ Weight Medium
 ItalicAngle 0
 IsFixedPitch true
 CharacterSet ExtendedRoman
-FontBBox -23 -250 715 805 
+FontBBox -23 -250 715 805
 UnderlinePosition -100
 UnderlineThickness 50
 Version 003.000

@@ -2,7 +2,7 @@
     <PropertyGroup>
         <RootNamespace>Serialize</RootNamespace>
         <AssemblyName>Serialize</AssemblyName>
-        
+
         <OutputType>Exe</OutputType>
         <TargetFramework>net8</TargetFramework>
         <InvariantGlobalization>true</InvariantGlobalization>
